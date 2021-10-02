@@ -1,0 +1,512 @@
+.link-secondary{ /* Panier */
+    color: white;
+    font-size: x-large;
+
+}
+.img-foote{
+    width: 21px;
+    height: 20px;
+}
+
+
+/* section de l'accueil */
+.text-accueil{
+    font-size: x-large;
+    font-style: oblique;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-left: 50px;
+
+}
+
+.card-body{
+    box-shadow: #e5e5e5;
+    border: #e5e5e5 5px solid;
+}
+/* .btn{
+    height: 20px;
+    width: 15px;
+    font-size: x-small;
+} */
+
+/* section du menu */
+.menu-du-jour{
+    font-size: x-large;
+    font-style: italic;
+    font-weight: bold;
+    color: #EE4747;
+    padding-left: 6em;
+
+}
+.menu{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: inherit;
+    padding-left: 3em;
+    font-size: 2em;
+
+}
+
+.description{
+    font-size: medium;
+    font-style: italic;
+    font-weight: bold;
+    padding-left: 2em;
+    text-decoration: underline;
+
+
+}
+.specialite{
+    font-size: medium;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+
+}
+
+.text-user{
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: inherit;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* footer */
+
+ #container {
+    width: 100%;
+    height: 330px
+}
+
+#part1 {
+    width: 100%;
+    height: 280px;
+    background-color: #292929
+}
+
+#part2 {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    position: relative;
+    top: -15px
+}
+
+#companyinfo {
+    width: 14%;
+    height: 280px;
+    position: relative;
+    left: 8%;
+    top: 30px
+}
+
+#sitelink {
+    font-size: 20px;
+    color: white
+}
+
+#sitelink:hover {
+    color: #e65100
+}
+
+#title {
+    color: gray;
+    position: relative;
+    top: 0px;
+    font-size: 14.1px
+}
+
+#detail {
+    color: #aaa7a7;
+    font-size: 16px
+}
+
+#explore {
+    width: 14%;
+    height: 280px;
+    position: relative;
+    top: -235px;
+    left: 29%
+}
+
+#txt1,
+#txt2,
+#txt3,
+#txt4,
+#txt5 {
+    color: white;
+    font-size: 20px
+}
+
+.link {
+    display: flex;
+    width: 90px;
+    height: 40px;
+    color: #aaa7a7;
+    background-color: transparent;
+    border-top: 2px solid white;
+    position: relative;
+    top: -10px
+}
+
+.link:hover,
+.link1:hover {
+    color: #e65100
+}
+
+#visit {
+    width: 14%;
+    height: 280px;
+    position: relative;
+    top: -515px;
+    left: 42%
+}
+
+.text {
+    color: #aaa7a7;
+    font-size: 14px;
+    margin-top: -10px
+}
+
+#legal {
+    width: 14%;
+    height: 280px;
+    position: relative;
+    top: -800px;
+    left: 59.5%
+}
+
+.link1 {
+    display: flex;
+    width: 150px;
+    height: 40px;
+    color: #aaa7a7;
+    background-color: transparent;
+    border-top: 2px solid white;
+    position: relative;
+    top: -10px;
+    margin-top: 7px
+}
+
+#subscribe {
+    position: relative;
+    top: -1080px;
+    left: 78%;
+    width: 14%;
+    height: 280px
+}
+
+#email {
+    color: white;
+    position: relative;
+    top: -20px
+}
+
+.btn {
+    position: relative;
+    top: -10px
+}
+
+#txt5 {
+    position: relative;
+    top: 0px
+}
+
+.social {
+    position: relative;
+    top: -5px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer
+}
+
+.fa-facebook-square:hover {
+    color: #3B579D
+}
+
+.fa-linkedin:hover {
+    color: #007BB6
+}
+
+.fa-twitter-square:hover {
+    color: #2CAAE1
+}
+
+#txt6 {
+    color: white;
+    position: relative;
+    top: 13px;
+    left: 8%;
+    width: 50%;
+    color: #aaa7a7
+}
+
+.material-icons {
+    position: relative;
+    top: 3px
+}
+
+@media only screen and (max-width:1000px) {
+    #companyinfo {
+        width: 20%
+    }
+
+    #sitelink {
+        font-size: 30px
+    }
+
+    #txt5,
+    #txt4 {
+        font-size: 17px
+    }
+
+    #txt5,
+    .social {
+        position: relative;
+        top: -5px
+    }
+}
+
+@media only screen and (max-width:850px) {
+    #companyinfo {
+        position: relative;
+        left: 3%
+    }
+
+    #txt6 {
+        position: relative;
+        left: 3%
+    }
+
+    #txt1,
+    #txt2,
+    #txt3,
+    #txt4,
+    #txt5 {
+        font-size: 15px
+    }
+
+    #explore {
+        position: relative;
+        top: -240px;
+        left: 26%
+    }
+
+    #sitelink {
+        font-size: 25px
+    }
+
+    #detail {
+        font-size: 13px
+    }
+
+    .link {
+        width: 60px
+    }
+
+    #visit {
+        position: relative;
+        top: -520px;
+        left: 37%
+    }
+
+    .text {
+        font-size: 13px
+    }
+
+    #legal {
+        position: relative;
+        top: -800px;
+        left: 54%
+    }
+
+    #subscribe {
+        position: relative;
+        top: -1080px;
+        left: 76%;
+        width: 20%
+    }
+
+    #txt5,
+    .social {
+        position: relative;
+        left: -110%;
+        top: px
+    }
+
+    #email,
+    .btn {
+        position: relative;
+        top: 0px
+    }
+
+    #part1 {
+        height: 250px
+    }
+}
+
+
+/* <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=_dkw-e3_pNgRl9WEtL2_nL8a5iiKYydpaW80mISbKNrNMx9bWZ2uH8i-i4ztknX7mnXrnFYWB05SZOXKcc3V77xvEl-eT_txYm8Fsbv9_bE" charset="UTF-8"></script><style> */
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+/* stylelint-disable selector-list-comma-newline-after */
+
+.blog-header {
+line-height: 1;
+border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-header-logo {
+font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+font-size: 2.25rem;
+}
+
+.blog-header-logo:hover {
+text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+}
+
+.display-4 {
+font-size: 2.5rem;
+}
+@media (min-width: 768px) {
+.display-4 {
+font-size: 3rem;
+}
+}
+
+.nav-scroller {
+position: relative;
+z-index: 2;
+height: 2.75rem;
+overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+display: flex;
+flex-wrap: nowrap;
+padding-bottom: 1rem;
+margin-top: -1px;
+overflow-x: auto;
+text-align: center;
+white-space: nowrap;
+-webkit-overflow-scrolling: touch;
+}
+
+.nav-scroller .nav-link {
+padding-top: .75rem;
+padding-bottom: .75rem;
+font-size: .875rem;
+}
+
+.card-img-right {
+height: 100%;
+border-radius: 0 3px 3px 0;
+}
+
+.flex-auto {
+flex: 0 0 auto;
+}
+
+.h-250 { height: 250px; }
+@media (min-width: 768px) {
+.h-md-250 { height: 250px; }
+}
+
+/* Pagination */
+.blog-pagination {
+margin-bottom: 4rem;
+}
+.blog-pagination > .btn {
+border-radius: 2rem;
+}
+
+/*
+* Blog posts
+*/
+.blog-post {
+margin-bottom: 4rem;
+}
+.blog-post-title {
+margin-bottom: .25rem;
+font-size: 2.5rem;
+}
+.blog-post-meta {
+margin-bottom: 1.25rem;
+color: #727272;
+}
+
+/*
+* Footer
+*/
+/* .blog-footer {
+padding: 2.5rem 0;
+color: #727272;
+text-align: center;
+background-color: #f9f9f9;
+border-top: .05rem solid #e5e5e5;
+}
+.blog-footer p:last-child {
+margin-bottom: 0;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
