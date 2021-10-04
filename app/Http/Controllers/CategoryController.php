@@ -36,7 +36,8 @@ class CategoryController extends Controller
         $category=new Category;
         $category->name= $request->name;
         $category->image= $image;
-        $category->save();
+       
+        auth()->user()->compte->categories()->save($category);
         return redirect()->route('categories.index');
     }
 

@@ -31,11 +31,12 @@ class AbonnementController extends Controller
             Notification::create([
                 'message'=>"La compagnie . $company->name. vient d'activer son compte",
                 'sender'=>auth()->user()->id,
-                'user_id'=> $admin->id
+                'user_id'=> $admin->id ?? 1
             ]);
             Notification::create([
                 'message'=>"Vous venez d'activer votre compte",
-                'user_id'=> auth()->user()->id
+                'user_id'=> auth()->user()->id,
+                'sender'=>auth()->user()->id,
             ]);
             // Envoie de mail pour compte activé
 

@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Compte;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class met extends Model
 {
@@ -28,5 +29,9 @@ class met extends Model
     }
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+     public function company(){
+        return $this->belongsTo(Compte::class);
     }
 }

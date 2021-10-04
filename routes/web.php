@@ -67,7 +67,7 @@ Route::resource('categories', 'App\Http\Controllers\CategoryController');
 Route::resource('profile', 'App\Http\Controllers\ProfileController');
 // Route::get('/create', 'App\Http\Controllers\ProfileController@create')->name('profile');
 Route::resource('menu', 'App\Http\Controllers\RestoMetsController');
-Route::get('/menu-du-jour', 'App\Http\Controllers\MetsController@index')->name('mets.index');
+Route::get('/{slug}/menu-du-jour', 'App\Http\Controllers\MetsController@index')->name('mets.index');
 // compte
 Route::get('/compte/gestion', 'App\Http\Controllers\CompteController@gestion')->name('compte.gestion');
 Route::get('/compte/activaction', 'App\Http\Controllers\CompteController@activer')->name('compte.activer');

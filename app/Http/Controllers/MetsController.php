@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\met;
 use App\Models\Category;
+use App\Models\Compte;
+use App\Models\met;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class MetsController extends Controller
 {
-    public function index()
+    public function index($slug)
     {
-        $mets = met::inRandomOrder()->take(6)->get();
+        $company=Compte::where('slug', $slug)->firstOrFail();
+        $mets = $company->mets()->inRandomOrder()->take(6)->get();
         $categories=Category::all();
         // dd($mets);
         return view('mets.index')->with('mets', $mets)->with('categories', $categories);

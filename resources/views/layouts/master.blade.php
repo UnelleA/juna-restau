@@ -53,7 +53,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Restaurants</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('mets.index')}}"></a>
+                                    {{-- <a class="dropdown-item" href="{{route('mets.index', )}}"></a> --}}
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -145,16 +145,16 @@
 
     <div id="container">
         <div id="part1">
-            <div id="companyinfo" class="col"> <a id="slink" href="{{route('mets.index')}}">
+            <div id="companyinfo" class="col"> <a id="slink" href="#">
                 <img src="storage/images/logoJR.png" alt="" width="50" height="50"></a>
                <p id="title">Juna Resto &hearts;</p>
                 <p id="detail">Votre satisfaction est notre tranquillité!!!</p>
             </div>
             <div id="explore">
                 <p id="txt1">Votre choix</p>
-                 <a class="link" href="{{route('mets.index')}}">Vos Restaurants</a>
+                 <a class="link" href="{{route('compte.index')}}">Vos Restaurants</a>
                 <a class="link" href="/register">S'inscrire</a>
-                <a class="link" href="{{route('mets.index')}}">Contactez-nous</a>
+                <a class="link" href="#">Contactez-nous</a>
             </div>
             <div id="visit">
                 <p id="txt2">Adresse</p>

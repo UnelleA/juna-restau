@@ -18,7 +18,7 @@
               <hr>
               <p class="card-text">{{$company->specialite}}</p>
 
-              <a href="{{route('mets.index')}}" class="btn btn-warning">Menu du jour</a>
+              <a href="{{route('mets.index', ['slug'=>$company->slug])}}" class="btn btn-warning">Menu du jour</a>
 
             </div>
             @endforeach

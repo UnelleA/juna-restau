@@ -40,6 +40,7 @@ class CompteController extends Controller
         // dd($request->image);
         $path = $request->file('image')->store('logo', 'public');
         $data['image']=$path;
+        $data['slug']=str_replace(" ", '-', $request->name);
         auth()->user()->compte()->create($data);
 
         return redirect()->route('dashboard');
