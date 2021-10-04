@@ -5,7 +5,9 @@ namespace App\Http\Controller\Auth;
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 class HomeController extends Controller
 {
     /**
@@ -28,19 +30,19 @@ class HomeController extends Controller
         switch (auth()->user()->type) {
             case 0:
 
-                return view('admin');
+                return view('dashboard.index');
             break;
 
             case 1:
-                return view('client');
+                return view('dashboard.index');
             break;
 
             case 2:
-                return view('dashboard');
+                return view('dashboard.index');
             break;
 
             case 3:
-                return view('livreur');
+                return view('dashboard.index');
             break;
             default:
             return view('login');

@@ -44,12 +44,12 @@ protected $redirectTo;
     {
         switch (Auth::user()->type) {
         case 0:
-            $this->redirectTo = '/admin';
+            $this->redirectTo = '/dashboard';
             return $this->redirectTo;
         break;
 
         case 1:
-            $this->redirectTo = '/client';
+            $this->redirectTo = '/dashboard';
             return $this->redirectTo;
         break;
 
@@ -59,13 +59,13 @@ protected $redirectTo;
         break;
 
         case 3:
-            $this->redirectTo = '/livreur';
+            $this->redirectTo = '/dashboard';
             return $this->redirectTo;
         break;
         default:
         $this->redirectTo = '/login';
         return $this->redirectTo;
-        } 
+        }
       }
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Compte;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,22 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('accueil');
-});
+    $companies=Compte::all();
+    return view('accueil', compact('companies'));
+})->name('home');
 
 Route::get('/new', function () {
     return view('new.index');
 });
 
 /* les routes de mets*/
-Route::get('/restaurant', 'App\Http\Controllers\MetsController@index')->name('mets.index');
-Route::get('/Ajouter/{title}', 'App\Http\Controllers\MetsController@show')->name('mets.show');
-Route::get('/Menu', 'App\Http\Controllers\MetsController@menu')->name('mets.menu');
+// Route::get('/Ajouter/{title}', 'App\Http\Controllers\MetsController@show')->name('mets.show');
+// Route::get('/Menu', 'App\Http\Controllers\MetsController@menu')->name('mets.menu');
 
 /* les routes du panier*/
 
 Route::get('/panier', 'App\Http\Controllers\CartController@index')->name('cart.index');
-Route::get('/petitpanier', 'App\Http\Controllers\CartController@panier')->name('cart.panier');
+// Route::get('/petitpanier', 'App\Http\Controllers\CartController@panier')->name('cart.panier');
 Route::get('/reservation', 'App\Http\Controllers\CartController@reservation')->name('cart.reservation');
 Route::post('/panier', 'App\Http\Controllers\CartController@store')->name('cart.store');
 Route::delete('/panier/{rowId}', 'App\Http\Controllers\CartController@destroy')->name('cart.destroy');
@@ -42,8 +43,8 @@ Route::patch('/panier/{rowId}', 'App\Http\Controllers\CartController@update')->n
 
 //les routes du paiement
 
-Route::get('/Paiement', 'App\Http\Controllers\CheckoutController@index')->name('paiement.index');
-Route::get('/Paiement', 'App\Http\Controllers\CheckoutController@store')->name('paiement.store');
+// Route::get('/Paiement', 'App\Http\Controllers\CheckoutController@index')->name('paiement.index');
+// Route::get('/Paiement', 'App\Http\Controllers\CheckoutController@store')->name('paiement.store');
 
 //les routes de compte
 // Route::get('/compte', 'App\Http\Controllers\CompteController@accueil')->name('/accueil');
@@ -56,7 +57,7 @@ Route::get('/admin', 'App\Http\Controllers\AdminController@index')->name('admin'
 Route::get('/livreur', 'App\Http\Controllers\LivreurController@index')->name('livreur');
 Route::get('/restaurateur', 'App\Http\Controllers\RestaurateurController@index')->name('restaurateur');
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/home', 'App\Http\Controllers\HomeController@index');
 
 //les routes du dashboard
 Route::get('dashboard', function () {
@@ -66,6 +67,25 @@ Route::resource('categories', 'App\Http\Controllers\CategoryController');
 Route::resource('profile', 'App\Http\Controllers\ProfileController');
 // Route::get('/create', 'App\Http\Controllers\ProfileController@create')->name('profile');
 Route::resource('menu', 'App\Http\Controllers\RestoMetsController');
+Route::get('/menu-du-jour', 'App\Http\Controllers\MetsController@index')->name('mets.index');
+// compte
+Route::get('/compte/gestion', 'App\Http\Controllers\CompteController@gestion')->name('compte.gestion');
+Route::get('/compte/activaction', 'App\Http\Controllers\CompteController@activer')->name('compte.activer');
+Route::resource('compte', 'App\Http\Controllers\CompteController');
+
+
+// abonnement
+// Route::resource('abonnement', 'App\Http\Controllers\AbonnementController');
+// Route::get('/abonnement/compagnies', 'App\Http\Controllers\AbonnementController@activer')->name('abonnement.abonner');
+Route::get('/abonnement', 'App\Http\Controllers\AbonnementController@index')->name('abonnement.index');
+Route::get('/abonnement/activate', 'App\Http\Controllers\AbonnementController@store')->name('abonnement.store');
+
+
+Route::post('/compagnie/desactivation', 'App\Http\Controllers\AbonnementController@desactiver')->name('desactivation');
+Route::post('/compagnie/activation', 'App\Http\Controllers\AbonnementController@activer')->name('activation');
+// notification
+Route::resource('notification', 'App\Http\Controllers\NotificationController');
+
 
 // routes de contact
 

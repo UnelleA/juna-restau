@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class met extends Model
 {
@@ -26,6 +27,6 @@ class met extends Model
         return number_format($price, 20, ', ',' '). ' FCFA';
     }
     public function category(){
-        return $this->belongsTo('App/Models/Category');
+        return $this->belongsTo(Category::class);
     }
 }

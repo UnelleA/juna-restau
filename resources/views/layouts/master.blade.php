@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="css/responsive.css">
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -36,7 +35,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light px-0 py-0">
                     <a class="navbar-brand" href="/">
                         <div class="logo">
-                            <img src="storage/images/logoJR.png" alt="" style="margin-top: -22px; width:60px; heigth:60px" />
+                            <img src="storage/images/logoJR.png" alt="" style="width:80px; heigth:80px; margin-top:-30px" />
                         </div>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -54,16 +53,14 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Restaurants</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">Chez Dadje</a>
-                                    <a class="dropdown-item" href="">Resto la vie</a>
-                                    <a class="dropdown-item" href="">Resto la joie</a>
+                                    <a class="dropdown-item" href="{{route('mets.index')}}"></a>
                                 </div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('contact.index')}}">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/register">s'inscrire</a>
+                                <a class="nav-link" href="/login">Connexion</a>
                             </li>
                         </ul>
                     </div>
@@ -164,8 +161,11 @@
                 <p class="text">Benin/Abomey-Calavi </p>
             </div>
             <div id="legal">
-                <p id="txt3">Legal</p> <a class="link1" href="#">Termes et Conditions
-                </a> <a class="link1" href="/login">Se connecter</a>
+                <p id="txt3">Legal</p>
+                <a class="link1" href="#">Termes et Conditions
+                </a>
+                <a class="link1" href="/login">Se connecter</a>
+                <a class="link1" href="{{route('dashboard')}}">Acceder au tableau de bord</a>
             </div>
             <div id="subscribe">
                 {{-- <p id="txt4">S'inscrire</p>
@@ -185,6 +185,7 @@
     </div>
 </footer>
 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- jQuery JS -->
     <script src="js/jquery-3.5.1.min.js"></script>
@@ -197,6 +198,9 @@
     <!-- main.js -->
     <script src="js/main.js"></script>
 
+{{-- <script>
 
+    $('#exampleModalCenter').modal('toggle')
+</script> --}}
 <!-- Mirrored from live.envalab.com/html/hotte/error.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Sep 2021 11:09:11 GMT -->
 </body></html>

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\met;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -13,7 +14,9 @@ class Category extends Model
         'name',
         'image',
     ];
-    public function mets(){
-        return $this->hasMany('App/Models/met');
+
+    public function mets()
+    {
+        return $this->hasMany(met::class);
     }
 }

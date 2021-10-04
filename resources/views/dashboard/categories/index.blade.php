@@ -30,16 +30,17 @@
 									<td class="cell100 column1">{{$loop->index +1}}</td>
 									<td class="cell100 column2">{{$category->name}}</td>
 									<td class="cell100 column3">
-                                        <div class="col-8 offset-2">
-                                            <img src="{{Storage::url($category->image)}}" alt="" class="mw-100">
-                                        </div>
-                                    </td>
+                                        <img src="{{Storage::url($category->image)}}" alt="" class="rounded" style="height: 50px; width: 50px">
+                                    </div>
+                                </td>
+                                <div class="col-8 offset-2">
 									<td class="cell100 column4" style="margin-top: 50px">
                                         {{-- <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups"> --}}
                                             <div class="btn-group mr-2" role="group" aria-label="First group">
-                                              <a href="{{ route('categories.edit', $category)}}" class="btn btn-warning btn-sm">Modifier</a>
-                                              <a href="#" class="btn btn-danger btn-sm btn-delete">Supprimer</a>
-                                              <form action="{{ route('categories.destroy', $category)}}" method="POST" class="delete-category">
+                                              <a href="{{ route('categories.edit', $category)}}"
+                                               class="btn btn-warning btn-sm btn-sm micon dw dw-edit" data-toggle="tooltip" data-placement="top" title="Modifier"></a>
+                                              <a href="#" class="btn btn-danger btn-sm btn-delete btn-sm micon dw dw-delete" data-toggle="tooltip" data-placement="top" title="Supprimer"></a>
+                                              <form action="{{ route('categories.destroy', $category)}}" method="POST" class="delete-form">
                                                   @method('DELETE')
                                                   @csrf
                                               </form>

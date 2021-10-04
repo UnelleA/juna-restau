@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Compte;
+use App\Models\Notification;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -23,6 +25,8 @@ class User extends Authenticatable
         'password',
         'type',
         'password_confirmation',
+
+
     ];
 
     /**
@@ -43,4 +47,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function compte()
+    {
+       return $this->hasOne(Compte::class);
+    }
+
+    public function notifications()
+    {
+       return $this->hasMany(Notification::class);
+    }
+
+    public function hasActiveAccount(){
+        if($this->compte){
+            return $this->compte->status;
+        }
+        return false;
+    }
+    public function totalNotif(){
+        if($this->notifications){
+            return $this->notifications->where('status', 0)->count();
+        }
+        return false;
+    }
+    
 }

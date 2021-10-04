@@ -43,13 +43,14 @@ class CartController extends Controller
             return $cartItem->id == $request->met_id;
        });
         if ($duplicate->isNotEmpty()) {
+
             return redirect()->route('mets.index')->with('success', 'le mets a été deja ajouté');
         }
         //   dd($request->p_id);
         $met = met::find($request->met_id);
         Cart::add($met->id, $met->title, 1, $met->price)
         ->associate('App\Models\met');
-
+        $request->session()->flash('showModal',1);
         return redirect()->route('mets.index')->with('success', 'le mets a été bien ajouté');
     }
 
@@ -86,7 +87,7 @@ class CartController extends Controller
     {
         $data= $request->json()->all();
         Cart::update($rowId, $data['qty']);
-
+dd($request->qty);
         Session::flash('success', 'La quantité du produit est passé à'. $data['qty']);
         return response()->json(['success'=>'Cart quantity has been updated']);
     }
@@ -103,11 +104,7 @@ class CartController extends Controller
         return back()->with('sucess', 'Le met a ete supprime');
     }
     // les mets ajoutes
-    public function panier()
-    {
-        return view('cart.panier');
-    }
-
+    
     public function reservation()
     {
         return view('cart.reservation');

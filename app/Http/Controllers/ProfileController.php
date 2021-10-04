@@ -19,7 +19,7 @@ class ProfileController extends Controller
             'name' => 'required',
             'image' => 'required|image|',
      ]);
-        dd($request->image);
+        // dd($request->image);
         $path = $request->file('image')->store('storage');
         Profile::create($data);
 

@@ -29,7 +29,7 @@
                     @foreach(Cart::content() as $met)
                     <tr>
                     <td>
-        <img src="/storage/images/{{$met->image}}" alt="mets" style = " height:50px; width:50px">
+        <img src="{{Storage::url($met->model->image)}}" alt="" style = " height:70px; width:70px">
 
                     </td>
                         {{-- <td class="cart-pic first-row"><img src="{{ asset('images/2.jpg') }}" width="100" height="100" alt=""></td> --}}
@@ -40,7 +40,8 @@
 
                           {{-- mettre ajout la quantite du panier --}}
 
-                      <td class="cart-title first-row" ><select name="qty" id="qty" data-id="{{$met->rowId}}" class="custom-select" id="inputGroupSelect03">
+                      <td class="cart-title first-row" ><select name="qty" id="qty" data-id="{{$met->rowId}}"
+                         class="custom-select" id="inputGroupSelect03">
                         @for($i = 1; $i <=1000; $i++)
                         <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
@@ -50,8 +51,12 @@
 
                           {{-- mettre ajout la quantite du panier --}}
 
+                    <td>
+        {{( $met->model->price)}}
 
-                      <td class="total-price first-row">$60.00</td>
+        {{-- {{getPrice(Cart::subtotal())}} --}}
+                    </td>
+                      {{-- <td class="total-price first-row">$60.00</td> --}}
                       <form action="{{ route('cart.destroy', $met->rowId) }}" method="post">
                             @csrf
                             @method('DELETE')
@@ -74,41 +79,28 @@
 
         <div class="row py-5 p-4 bg-white rounded shadow-sm">
           <div class="col-lg-6">
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
-            <div class="p-4">
-              <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
-              <div class="input-group mb-4 border rounded-pill p-2">
-                <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
-                <div class="input-group-append border-0">
-                  <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
-                </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" style="text-align: center" class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Les précisions sur votre commande</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
-            </div>
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Vos precisions sur la commande.</div>
-            <div class="p-4">
-              <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
-              <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-            </div>
           </div>
           <div class="col-lg-6">
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Détails de la commande </div>
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold" style="text-align: center">Détails de la commande </div>
             <div class="p-4">
-              <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
               <ul class="list-unstyled mb-4">
                 <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Sous-total </strong><strong>{{getPrice(Cart::subtotal())}}</strong></li>
-                 <li class="d-flex justify-content-between py-3 border-bottom">
-                     <strong class="text-muted"> Shipping and handling</strong><strong>$10.00</strong></li>
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Taxe</strong>
+                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Taxe de livraison</strong>
                     <strong>{{getPrice(Cart::tax())}}</strong></li>
                 <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                   <h5 class="font-weight-bold">{{getPrice(Cart::total())}}</h5>
                 </li>
               </ul>
-
-              <button type="button"  class="kkiapay-button btn btn-warning">Payer votre facture</button>
-{{--
-              <a href="#" class="btn btn-dark rounded-pill py-2 btn-block">
-                  Passez a la caisse</a> --}}
+        </div>
+            </div>
+            <div class="col-lg-8 d-grid gap-2 d-flex justify-content-between row">
+                <button class="btn btn-primary" type="button"><a href="menu.index" style="color: white">Continuer mes achats</a></button>
+                <button class="btn btn-primary" type="button"><a href="/reservation" style="color: white">Reserver</a></button>
+                <button type="button"  class="kkiapay-button btn btn-primary">Payer votre facture</button>
             </div>
           </div>
         </div>
@@ -121,7 +113,7 @@
 @else
 <div class="col-md-12">
     <h5>Votre panier est vide.</h5>
-<p>Vous pouvez visiter un <a href=" {{route('mets.index')}}">restaurant </a>de votre choix pour faire vos achats.</p>
+<p>Vous pouvez visiter un <a href=" {{route('menu.index')}}">restaurant </a>de votre choix pour faire vos achats.</p>
 </div>
 @endif
 
@@ -133,11 +125,12 @@
     data=""
     url=""
     position="center"
-    theme="#ec971f"
+    theme="#0000FF"
     sandbox="true"
     key="042121e0216011ec9d3a81cf5faf6ca6"
     src="https://cdn.kkiapay.me/k.js">
 </script>
+
 {{-- end sdk kkiapay --}}
 
 

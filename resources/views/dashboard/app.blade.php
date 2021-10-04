@@ -2,10 +2,11 @@
 <html>
 <head>
     <style>
-        .bo{
+        .container .bo{
     border: 3px solid red !important;
-}
-    </style>
+        }
+        </style>
+
 	<!-- Basic Page Info -->
 	<meta charset="utf-8">
 	<title>Dashboard restaurateur</title>
@@ -56,26 +57,6 @@
 	</script>
 </head>
 <body>
-	<div class="pre-loader">
-		<div class="pre-loader-box">
-			<div class="loader-logo" style="border: 2px solid white; box-shadow: 0 0 5px rgba(0, 0, 0, .8)">
-                    <div>
-                        <img src="{{asset('storage/images/10.jpg')}}" alt="">
-                    </div>
-                    <h3 style="margin-top:10px; margin-left:35px; color: blue">
-                        Resto la joie
-                    </h3>
-               </div>
-			<div class='loader-progress' id="progress_div">
-				<div class='bar' id='bar1'></div>
-			</div>
-			<div class='percent' id='percent1'>0%</div>
-			<div class="loading-text">
-				Loading...
-			</div>
-		</div>
-	</div>
-
 	<div class="header">
 		<div class="header-left">
 			<div class="menu-icon dw dw-menu"></div>
@@ -84,7 +65,7 @@
 				<form>
 					<div class="form-group mb-0">
 						<i class="dw dw-search2 search-icon"></i>
-						<input type="text" class="form-control search-input" placeholder="Search Here">
+						<input type="text" class="form-control search-input" placeholder="Rechercher ici...">
 						<div class="dropdown">
 							<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
 								<i class="ion-arrow-down-c"></i>
@@ -96,20 +77,8 @@
 										<input class="form-control form-control-sm form-control-line" type="text">
 									</div>
 								</div>
-								<div class="form-group row">
-									<label class="col-sm-12 col-md-2 col-form-label">To</label>
-									<div class="col-sm-12 col-md-10">
-										<input class="form-control form-control-sm form-control-line" type="text">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-12 col-md-2 col-form-label">Subject</label>
-									<div class="col-sm-12 col-md-10">
-										<input class="form-control form-control-sm form-control-line" type="text">
-									</div>
-								</div>
 								<div class="text-right">
-									<button class="btn btn-primary">Search</button>
+									<button class="btn btn-primary">Rechercher</button>
 								</div>
 							</div>
 						</div>
@@ -127,55 +96,24 @@
 			</div>
 			<div class="user-notification">
 				<div class="dropdown">
-					<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+					<a class="dropdown-toggle no-arrow mr-3" href="#" role="button" data-toggle="dropdown">
 						<i class="icon-copy dw dw-notification"></i>
-						<span class="badge notification-active"></span>
+						<span class="badge notification-active ">{{auth()->user()->totalNotif() ?? ''}} </span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<div class="notification-list mx-h-350 customscroll">
 							<ul>
-								<li>
-									<a href="#">
-										<img src="{{asset('vendors/images/img.jpg')}}" alt="">
-										<h3>John Doe</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="{{asset('vendors/images/photo1.jpg')}}" alt="">
-										<h3>Lea R. Frith</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="{{asset('vendors/images/photo2.jpg')}}" alt="">
-										<h3>Erik L. Richards</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="{{asset('vendors/images/photo3.jpg')}}" alt="">
-										<h3>John Doe</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="{{asset('vendors/images/photo4.jpg')}}" alt="">
-										<h3>Renee I. Hansen</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<img src="{{asset('vendors/images/img.jpg')}}" alt="">
-										<h3>Vicki M. Coleman</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
-									</a>
-								</li>
+								@forelse (auth()->user()->notifications as $notification)
+                                    @if(!$notification->status)
+                                    <li>
+                                        <a href="#">
+                                            <p>{!! $notification->message !!}</p>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @empty
+                                        Aucune nouvelle notification
+                                @endforelse
 							</ul>
 						</div>
 					</div>
@@ -185,12 +123,17 @@
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 						<span class="user-icon">
-							<img src="{{asset('vendors/images/photo1.jpg')}}" alt="">
+							<img src="{{asset('storage/images/c1.jfif')}}" alt="">
 						</span>
-						<span class="user-name">Juna
-						{{-- @auth()
-							{{auth::user()->name}}
-						@endauth</span> --}}
+						<span class="user-name">
+						@auth()
+							{{auth()->user()->name}}
+						@endauth</span>
+
+                        <span class="user-image">
+                            @auth()
+                                {{auth()->user()->image}}
+                            @endauth</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 						<a class="dropdown-item" href="{{route('profile.index')}}"><i class="dw dw-user1"></i>Profile</a>
@@ -209,11 +152,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="github-link">
-				<a href="{{asset('https://github.com/dropways/deskapp')}}" target="_blank">
-					<img src="{{asset('vendors/images/github.svg')}}" alt=""></a>
-			</div>
-		</div>
+
 	</div>
 
 	<div class="right-sidebar">
@@ -293,13 +232,20 @@
 
 	<div class="left-side-bar">
 		<div class="brand-logo d-flex justify-content-between">
-			<a href="{{route('dashboard')}}">
+			@if (auth()->user()->type==0)
+            <a href="#" class="text-uppercase text-center">Administrateur</a>
+            @else
+            <a href="{{route('dashboard')}}">
 				{{-- <img src="{{asset('storage/images/11.jpg')}}" alt="" class="dark-logo"> --}}
-
-            <img style="height: 50px; width:50px" src="{{asset('storage/images/11.jpg')}}" alt="" class="light-logo">
-            <span class="ml-4">Resto la joie</span>
+                @if (auth()->user()->compte)
+                <img style="height: 50px; width:50px" src="{{asset('storage/'.auth()->user()->compte->image )}}" alt="" class="light-logo">
+                @else
+                <img style="height: 50px; width:50px" src="{{asset('storage/images/food2.png')}}" alt="" class="light-logo">
+                @endif
+            <span class="ml-4">{{ auth()->user()->compte->name ?? 'Nom du resto' }}</span>
 
 			</a>
+            @endif
 			<div class="close-sidebar" data-toggle="left-sidebar-close">
 				<i class="ion-close-round"></i>
 			</div>
@@ -309,15 +255,18 @@
 				<ul id="accordion-menu">
 					<li class="dropdown">
 						<a href="javascript:;')}}" class="dropdown-toggle">
-							<span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
+							<span class="mtext">Aller à</span>
 						</a>
 						<ul class="submenu">
-							<li><a href="{{route('dashboard')}}">Dashboard admin</a></li>
+							<li><a href="{{route('home')}}"><span class="micon dw dw-house-1"></span> Accueil</a></li>
+
 						</ul>
 					</li>
-					<li class="dropdown">
+					@if(auth()->user()->type ==2 )
+                    @if(auth()->user()->hasActiveAccount())
+                    <li class="dropdown">
 						<a href="javascript:;')}}" class="dropdown-toggle">
-							<span class="fa-list-alt"></span><span class="mtext">Catégories</span>
+							<span class="icon-reorde"></span><span class="mtext">Catégories</span>
 						</a>
 						<ul class="submenu">
 							<li><a href="{{route('categories.create')}}">Ajouter une catégorie</a></li>
@@ -329,11 +278,37 @@
 							<span class="micon dw dw-library"></span><span class="mtext">Menu du jour</span>
 						</a>
 						<ul class="submenu">
-							<li><a href="{{route('menu.create')}}">Ajouter mets</a></li>
+							<li><a href="{{route('menu.create')}}">Ajouter un mets</a></li>
+							<li><a href="{{route('menu.index')}}">Afficher tous les mets</a></li>
 						</ul>
 					</li>
+                    @endif
+                    <li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="fa fa-cutlery"></span><span class="mtext">Mon Restaurant</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="{{route('compte.gestion')}}">Gestion de mon espace</a></li>
+                            @if (!auth()->user()->hasActiveAccount())
+							<li><a href="{{route('compte.activer')}}">Activer mon compte</a></li>
+                            @endif
+						</ul>
+					</li>
+                    @endif
 
+                    @if(auth()->user()->type==0)
+                    <li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-library"></span><span class="mtext">Mes compagnies</span>
+						</a>
+						<ul class="submenu">
+							{{-- <li><a href="{{route('abonnement.abonner')}}">Abonner une compagnie</a></li> --}}
+							<li><a href="{{route('abonnement.index')}}">Listes des compagnies</a></li>
+						</ul>
+					</li>
+                    @endif
 				</ul>
+
 			</div>
 		</div>
 	</div>
@@ -345,7 +320,7 @@
 			</div>
 		</div>
 	</div>
-    <div  style="margin-top: 100px">
+    <div  style="margin-top: 20px">
         @yield('content')
     </div>
 
@@ -379,12 +354,19 @@
 
 
         </script>
+
     <!--===============================================================================================-->
         <script src="{{asset('js table/main.js')}}"></script>
         <script>
+// tooltip bootstrap
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
             $('.btn-delete').click(function(){
-                $(this).siblings('.delete-category').submit();
-            })
+                $(this).siblings('.delete-form').submit();
+            });
         </script>
 </body>
 </html>

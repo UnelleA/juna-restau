@@ -55,7 +55,6 @@ class RestoMetsController extends Controller
     {
         $categories=Category::all();
         $met=met::findOrFail($menu);
-        dd($met, $categories, $met->category());
         return view('dashboard.menu.edit', compact('met', 'categories'));
     }
 
@@ -87,10 +86,10 @@ class RestoMetsController extends Controller
         return redirect()->route('menu.index');
     }
 
-    public function destroy(met $met)
+    public function destroy(Request $request, $menu)
     {
+        $met=met::findOrFail($menu);
         $met->delete();
-
         return back();
     }
 
