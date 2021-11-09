@@ -1,9 +1,32 @@
 @extends('dashboard.app')
 @section('content')
+<style>
 
+    .container form {
+
+border: 1px solid white;
+box-shadow:box-shadow: 10px 10px 10px white;
+margin-left: 280px;
+background-color: dark-gray;
+width: 500px;
+/* height: 200px; */
+
+}
+
+.form-group{
+text-align: center;
+
+}
+.btn{
+margin-left: 170px;
+}
+</style>
 <div class="container">
-    <form action="{{route('compte.store')}}" method="POST"  enctype="multipart/form-data">
+    <form action="{{ auth()->user()->compte ? route('compte.update',auth()->user()->compte ) : route('compte.store')}}" method="POST"  enctype="multipart/form-data">
     @csrf
+    @if (auth()->user()->compte)
+        @method('PUT')
+    @endif
     <div class="form-group">
         <label for="text">Nom de votre restaurant:</label>
         @if ( auth()->user()->compte)

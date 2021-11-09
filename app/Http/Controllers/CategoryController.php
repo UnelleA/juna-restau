@@ -10,8 +10,18 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        // $categories = $company->mets()->inRandomOrder()->take(1000)->get();
+        // $company = categories;
+        $categories = Category::where('compte_id',auth()->user()->compte->id)->get();
+        // $company=Category::where('slug', $slug)->firstOrFail();
 
         return view('dashboard.categories.index', compact('categories'));
+
+
+        // auth()->user()->compte->categories;
+
+        // auth()->user()->compte->categories;
+// return view(dashboard.categories.index, compact('categories'));
 
     }
 
@@ -36,7 +46,7 @@ class CategoryController extends Controller
         $category=new Category;
         $category->name= $request->name;
         $category->image= $image;
-       
+
         auth()->user()->compte->categories()->save($category);
         return redirect()->route('categories.index');
     }

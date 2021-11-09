@@ -23,6 +23,7 @@ class User extends Authenticatable
         'surname',
         'email',
         'password',
+        'contact',
         'type',
         'password_confirmation',
 
@@ -64,6 +65,11 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function hasAccount(){
+
+        return $this->compte  ? true : false;
+    }
     public function totalNotif(){
         if($this->notifications){
             return $this->notifications->where('status', 0)->count();
@@ -71,5 +77,5 @@ class User extends Authenticatable
         return false;
     }
 
-    
+
 }

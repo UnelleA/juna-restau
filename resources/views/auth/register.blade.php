@@ -67,6 +67,13 @@ button:focus {
     box-shadow: none !important;
     outline-width: 0
 }
+.card{
+    box-shadow:5px 5px 5px 5px darkgray;
+}
+.card-header{
+    text-align: center; font-size: 1.5em;
+    color: white;
+}
     </style>
 </head>
 @section('content')
@@ -74,7 +81,7 @@ button:focus {
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="text-align: center; font-size: 1.5em">{{ __('Inscription') }}</div>
+                <div class="card-header" style=" background-color: black;">{{ __('Inscription') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -167,6 +174,21 @@ button:focus {
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
                                  name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="contact" class="col-md-4 col-form-label text-md-right">{{ __('Contact') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="contact" type="number" class="form-control @error('contact') is-invalid @enderror"
+                                 name="contact" value="{{ old('contact') }}" required autocomplete="contact" autofocus>
+
+                                @error('contact')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

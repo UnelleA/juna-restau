@@ -1,27 +1,28 @@
 @extends('layouts.master')
 @section('content')
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-    <div class="contact-content" style="border: 2px solid black;">
-        <h3>Contact Us</h3>
-        <img src="img/border.png" alt="" />
-        <div class="contact-info d-flex align-items-center">
+<div class="container text-center shadow-lg col-8 col-md-6 mb-5 py-4">
+    <div class="contact-content">
+        <h3>Contactez-nous</h3>
+        <hr>
+        <img src="{{asset('img/border.png')}}" alt="" />
+        <div class="contact-info d-flex align-items-center shadow">
             <div class="icon"><i class="icofont-phone"></i></div>
             <div class="info">
-                <a href="#">+880 659 468</a>
-                <a href="#">02 697 86456</a>
+                <a href="#">+229 94183073</a>
+                <a href="#">+229 51929617</a>
             </div>
         </div>
-        <div class="contact-info d-flex align-items-center">
+        <div class="contact-info d-flex align-items-center shadow">
             <div class="icon"><i class="icofont-email"></i></div>
             <div class="info">
-                <a href="#">support@gmail.com</a>
-                <a href="#">hotte24@gmail.com</a>
+                <a href="#">unelamous16@gmail.com</a>
+                <a href="#">junaeats17@gmail.com</a>
             </div>
         </div>
-        <div class="contact-info d-flex align-items-center">
+        <div class="contact-info d-flex align-items-center shadow">
             <div class="icon"><i class="icofont-google-map"></i></div>
             <div class="info">
-                <a href="#">855 Road, Brooklyn Street New York 600, Baraboo, Wisconsin(WI)</a>
+                <a href="#">Benin/ Abomey-Calavi</a>
             </div>
         </div>
     </div>

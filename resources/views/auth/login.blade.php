@@ -6,7 +6,7 @@
     color: #000;
     overflow-x: hidden;
     height: 100%;
-    /* background-image: url("storage/images/12.jpg"); */
+    /* background-image: url("storage/images/food2.jfif"); */
     background-repeat: no-repeat;
     background-size: 100% 100%
 }
@@ -67,14 +67,23 @@ button:focus {
     box-shadow: none !important;
     outline-width: 0
 }
+.card{
+    box-shadow: 1px 1px 2px 2px black;
+}
+.card-header{
+    text-align: center; font-size: 1.5em;
+    color: white;
+
+}
+
     </style>
 </head>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card"  style="box-shadow:5px 5px 5px 5px darkgray">
-                <div style="text-align: center; font-size: 1.5em" class="card-header">{{ __('Connexion') }}</div>
+            <div class="card">
+                <div class="card-header" style=" background-color: black;">{{ __('Connexion') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -117,7 +126,7 @@ button:focus {
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label" for="remember" style="margin-left: 13px">
                                         {{ __('Se souvenir de moi') }}
                                     </label>
                                 </div>
@@ -137,7 +146,7 @@ button:focus {
                                 @endif
                                 <div class="form-group row mb-0">
                                     <span>N'aviez-vous pas de compte?</span>
-                                    <a class="btn btn-link" href="/register">
+                                    <a class="btn btn-link" href="{{route('register')}}">
                                         {{ __('S\'inscrire') }}
                                     </a>
                                 </div>

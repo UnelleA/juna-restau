@@ -6,8 +6,20 @@ use App\Models\met;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class RestoMetsController extends Controller
+class GestionClientController extends Controller
 {
+    public function commande()
+    {
+        return view('dashboard.gestion_client.commande');
+    }
+
+
+    public function reservation()
+    {
+        return view('dashboard.gestion_client.reservation');
+    }
+
+
     public function index()
     {
         $mets=met::all();

@@ -32,7 +32,7 @@ class CompteController extends Controller
             'name' => 'required',
             'description' => 'required',
             'specialite' => 'required',
-            'image' => 'required|image|',
+            'image' => 'required|image',
             // 'video' => 'required|mimes:mp4,mov,ogg | max:20000',
 
 
@@ -58,8 +58,23 @@ class CompteController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $data = $request->validate([
-        ]);
+            'name' => 'required',
+            'description' => 'required',
+            'specialite' => 'required',
+            'image' => 'required|image',
+            // 'video' => 'required|mimes:mp4,mov,ogg | max:20000',
+
+
+     ]);
+        // dd($request->image);
+        $path = $request->file('image')->store('logo', 'public');
+        $data['image']=$path;
+        $data['slug']=str_replace(" ", '-', $request->name);
+        auth()->user()->compte()->update($data);
+
+        return redirect()->route('dashboard');
     }
 
     public function destroy(compte $Compte)

@@ -39,20 +39,28 @@ class CartController extends Controller
     {
         //
     //    dd($request->id, $request->title, $request->price);
-       $duplicate = Cart::search(function ($cartItem, $rowId) use ($request) { //rechercher un metion dans notre panier
+       $duplicate = Cart::search(function ($cartItem, $rowId) use ($request) { //rechercher un metS dans notre panier
             return $cartItem->id == $request->met_id;
        });
         if ($duplicate->isNotEmpty()) {
+           return response()->json(['modif'=>'Ce met est ajouté déjà']);
 
-            return redirect()->route('mets.index')->with('success', 'le mets a été deja ajouté');
         }
         //   dd($request->p_id);
         $met = met::find($request->met_id);
         Cart::add($met->id, $met->title, 1, $met->price)
         ->associate('App\Models\met');
-        $request->session()->flash('showModal',1);
-        return redirect()->route('mets.index')->with('success', 'le mets a été bien ajouté');
+        $request->session()->flash('showModal', 1);
+        return response()->json(['success'=>'Le met a été bien ajouté']);
+
+
     }
+    // fonction  publique modifier ()
+    // {
+    //     toast ( 'Post édité !' );
+    //     return  redirect ( route ( 'posts.list' ));
+    // };
+
 
     /**
      * Display the specified resource.
@@ -79,17 +87,16 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param int $id
-     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $rowId)
+    public function update(Request $request)
     {
-        $data= $request->json()->all();
-        Cart::update($rowId, $data['qty']);
-dd($request->qty);
-        Session::flash('success', 'La quantité du produit est passé à'. $data['qty']);
-        return response()->json(['success'=>'Cart quantity has been updated']);
+        $data = $request->json()->all();
+        Cart::update($request->Id, $request->qty);
+        $subtotal=getPrice(Cart::subtotal());
+        // dd($request->qty);
+
+        return response()->json(['success'=>'La quantité du produit a ete mise ajout', 'subtotal'=>$subtotal]);
     }
 
     /**
@@ -103,12 +110,12 @@ dd($request->qty);
 
         return back()->with('sucess', 'Le met a ete supprime');
     }
+
     // les mets ajoutes
-    
-    public function reservation()
+
+    public function empty()
     {
-        return view('cart.reservation');
+        Cart::destroy();
+        return back();
     }
 }
-
-

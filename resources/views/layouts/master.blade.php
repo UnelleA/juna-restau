@@ -1,27 +1,32 @@
 <html class="no-js" lang="fr"><!-- Mirrored from live.envalab.com/html/hotte/error.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Sep 2021 11:09:11 GMT --><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juna Resto</title>
+    <title>Juna Eats</title>
     <!-- Favicon -->
     {{-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> --}}
+    {{-- fontawesome --}}
+    <link rel="stylesheet" href="{{asset('path/to/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="icon" href="{{asset('favicon.ico')}}" type="image/x-icon">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <!-- Icofont CSS -->
-    <link rel="stylesheet" href="css/icofont.min.css">
+    <link rel="stylesheet" href="{{asset('css/icofont.min.css')}}">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!-- Venobox CSS -->
-    <link rel="stylesheet" href="css/venobox.min.css">
+    <link rel="stylesheet" href="{{asset('css/venobox.min.css')}}">
     <!-- Style CSS -->
-    <link rel="stylesheet" href="css/style1.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{asset('css/style1.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    @yield('link')
     {{-- <link rel="stylesheet" type="text/css" href="storage/front/css/style.css"> --}}
 
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+     <link rel="stylesheet" href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css')}}">
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
 <body>
@@ -33,9 +38,9 @@
         <div class="header py-1 sticky">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light px-0 py-0">
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand" href="#">
                         <div class="logo">
-                            <img src="storage/images/logoJR.png" alt="" style="width:80px; heigth:80px; margin-top:-30px" />
+                            <img src="{{asset('storage/images/logoJR.png')}}" alt="" style="width:200px; heigth:200px; margin-top:-15px; margin-left:-100px" />
                         </div>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -64,8 +69,17 @@
                             </li>
                         </ul>
                     </div>
+                    {{-- panier --}}
                     <div class="open-time">
-                        <span style="color: white">{{Cart::count()}}<a class="icofont-cart" href="{{route('cart.index')}}" style="color: white"> Panier</a></span>
+                        <span style="color: white"><label id="count">{{Cart::count()}}</label> <a class="icofont-cart" href="{{route('cart.index')}}" style="color: white"></a></span>
+                    </div>
+                    {{-- reservation --}}
+                    <div class="open-time">
+                        <span style="color: yellow; margin-left:3rem;  "><label id="count_reserver">
+                            {{-- @php
+                             echo count(session('reservation') );
+                            @endphp --}}
+                            </label> <a class="icofont-ticket" href="{{route('reservations.index')}}" style="color: yellow; margin-left:3rem; "></a></span>
                     </div>
                 </nav>
             </div>
@@ -94,7 +108,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" style="height: 450px">
               <div class="item active">
-                <img src="storage/images/r2.jpg" alt="Chania">
+                <img src="{{asset('storage/images/r2.jpg')}}" alt="Chania">
                 <div class="carousel-caption">
                   <h3>Toutes mes specialités culinaires</h3>
                   <p>J'adore Juna Resto</p>
@@ -102,7 +116,7 @@
               </div>
 
               <div class="item">
-                <img src="storage/images/r4.jpg" alt="Chicago">
+                <img src="{{asset('storage/images/r4.jpg')}}" alt="Chicago">
                 <div class="carousel-caption">
                   <h3>Salade!!! Miam miam!!!</h3>
                   <p>Plus de soucis pour mon ventre</p>
@@ -110,7 +124,7 @@
               </div>
 
               <div class="item">
-                <img src="storage/images/r3.jpg" alt="New York">
+                <img src="{{asset('storage/images/r3.jpg')}}" alt="New York">
                 <div class="carousel-caption">
                   <h3>Riz créole</h3>
                   <p>Mangez sain</p>
@@ -140,67 +154,218 @@
       </div>
   {{-- @yield('donnee') --}}
 
-
+{{-- begin footer --}}
 <footer>
 
     <div id="container">
         <div id="part1">
+            {{-- <p id="txt1">NOS SERVICES</p> --}}
             <div id="companyinfo" class="col"> <a id="slink" href="#">
-                <img src="storage/images/logoJR.png" alt="" width="50" height="50"></a>
-               <p id="title">Juna Resto &hearts;</p>
-                <p id="detail">Votre satisfaction est notre tranquillité!!!</p>
+                <img src="{{asset('storage/images/logoJR.png')}}" alt="" width="160" height="100"></a>
+               <p id="title">Juna Eats &hearts;</p>
+                <p id="detail">Votre satisfaction est notre tranquillité !!!</p>
             </div>
+            {{-- <hr style="width: 1px; height: 20px; display: inline-block;"> --}}
+
             <div id="explore">
-                <p id="txt1">Votre choix</p>
-                 <a class="link" href="{{route('compte.index')}}">Vos Restaurants</a>
-                <a class="link" href="/register">S'inscrire</a>
-                <a class="link" href="#">Contactez-nous</a>
+                <p id="txt1">NOS SERVICES</p>
+                 <p id="detail">Divers plats culinaires pour nos clients.</p> <br>
+                <p id="detail">Livraison presque gratuite.</p>  <br>
+                <p id="detail">Ventes et achats de mets.</p>
             </div>
+            {{-- <hr style="width: 1px; height: 20px; display: inline-block;"> --}}
+
             <div id="visit">
-                <p id="txt2">Adresse</p>
-                <p class="text">Benin/Abomey-Calavi </p>
+                <p id="txt2"></p>
+                <p class="text"></p>
             </div>
             <div id="legal">
-                <p id="txt3">Legal</p>
-                <a class="link1" href="#">Termes et Conditions
-                </a>
+                <p id="txt3">NOS PARTENAIRES</p>
+                <a class="link1" href="{{route('home')}}">Vos Restaurants</a>
                 <a class="link1" href="/login">Se connecter</a>
                 <a class="link1" href="{{route('dashboard')}}">Acceder au tableau de bord</a>
+                <a class="link1" href="/login">Rejoignez nos livreurs</a>
             </div>
             <div id="subscribe">
-                {{-- <p id="txt4">S'inscrire</p>
-                <form> <input id="email" type="email" placeholder="Email"> </form>
-                 <a class="waves-effect waves-light btn">Subscribe</a> --}}
-                <p id="txt5">Se connecter à nos compte</p> <i class="fab fa-facebook-square social fa-2x"></i>
-                <i class="fab fa-linkedin social fa-2x"></i> <i class="fab fa-twitter-square social fa-2x"></i>
-            </div>
+                <p id="txt5">CONTACTS</p>
+
+                            <div class="icon"><span class="icofont-phone"></span><a href="#" class=" link">+229 51929617</a></div>
+
+                            <div class="icon"><span class="icofont-email"></span> <a href="#" class=" link">unelamous16@gmail.com</a></div>
+
+                                <a href="#" class=" link">Benin/ Abomey-Calavi</a>
+                                <div class="icon"><span class="icofont-google-map"></span></div>
+
+                    </div>
+
         </div>
         <div id="part2">
             <p id="txt6"><i class="material-icons tiny">
-                 copyright</i>Copyright {{date('Y')}} - Tous les droits privés
-                 {{-- &copy; Copyright {{date('Y')}} --}}
-                {{-- &middot; <a href="{{route('mets.index')}}">A Propos</a>     --}}
+            </i>Copyright {{date('Y')}} - Tous droits réservés | Juna Eats
             </p>
         </div>
     </div>
 </footer>
+{{-- end footer --}}
 
+@yield('script')
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- jQuery JS -->
-    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
     <!-- Popper JS -->
-    <script src="js/popper.min.js"></script>
+    <script src="{{asset('js/popper.min.js')}}"></script>
     <!-- Venobox JS -->
-    <script src="js/venobox.min.js"></script>
+    <script src="{{asset('js/venobox.min.js')}}"></script>
     <!-- Bootstrap JS -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- main.js -->
-    <script src="js/main.js"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+{{-- cart --}}
+    <script>
+        $('.qty').on('change', function(){
+            var qty= $(this).val();
+            var Id= $(this).attr('data-id');
+            var price= $(this).siblings('.item-price').attr('data-price');
+            var subtotal=qty *price;
+            $('.sous-total-'+ Id).text(subtotal);
+            $.ajaxSetup({
+        headers:{
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+    });
+            $.ajax({
+                url: "{{ route('cart.update')}}",
+                type: "post",
+                dataType:"json",
+                data:{
+                    qty,
+                    Id
+                },
+                success: function(response){
+                    console.log(response);
 
+                    $('.sous-total').text(response.subtotal);
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            })
+
+
+        });
+    </script>
+
+{{-- reservation --}}
 {{-- <script>
+    $('.qty').on('change', function(){
+        var qty= $(this).val();
+        var Id= $(this).attr('data-id');
+        var price= $(this).siblings('.item-price').attr('data-price');
+        var subtotal=qty *price;
+        $('.sous-total1-'+ Id).text(subtotal);
+        $.ajaxSetup({
+    headers:{
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+});
+        $.ajax({
+            url: "{{ route('reservations.update')}}",
+            type: "post",
+            dataType:"json",
+            data:{
+                qty,
+                Id
+            },
+            success: function(response){
+                console.log(response);
 
-    $('#exampleModalCenter').modal('toggle')
+                $('.sous-total1').text(response.subtotal);
+            },
+            error: function(error){
+                console.log(error);
+            }
+        })
+
+
+    });
 </script> --}}
-<!-- Mirrored from live.envalab.com/html/hotte/error.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Sep 2021 11:09:11 GMT -->
+
+
+<script>
+    $(document).ready(function(){
+$('.ajout').click(function(){
+    var  id=$(this).data('id');
+    var _token   = $('meta[name="csrf-token"]').attr('content');
+   // alert(_token);
+  // $("#myformcart").trigger("reset")
+    $.ajaxSetup({
+        headers:{
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+    });
+        $.ajax(
+        {
+            url:  "{{ route('cart.store')}}",
+            type:'POST',
+            data:{
+            met_id:id,
+            },
+            success:function(response){
+            if(response.success){
+
+                $('#count').html(parseInt($('#count').html())+1);
+
+               // alert(response.success);
+            }else if(response.modif){
+                //alert()
+            }
+
+            },
+
+        }
+    );
+
+    });
+
+    $('.reservation').click(function(){
+    var  id=$(this).data('id');
+    var _token   = $('meta[name="csrf-token"]').attr('content');
+   // alert(_token);
+  // $("#myformcart").trigger("reset")
+    $.ajaxSetup({
+        headers:{
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+    });
+        $.ajax(
+        {
+            url: "{{ route('reservations.store')}}",
+            type:'POST',
+            data:{
+            met_id:id,
+            },
+            success:function(response){
+            if(response.success){
+
+                $('#count_reserver').html(parseInt($('#count_reserver').html())+1);
+
+
+
+                alert(response.success);
+            }else if(response.modif){
+                alert(response.modif);
+            }
+
+            },
+
+        }
+    );
+
+    });
+});
+
+</script>
+    @yield('extra-js')
+
 </body></html>

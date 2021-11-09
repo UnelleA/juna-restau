@@ -1,36 +1,74 @@
 @extends('layouts.master')
 @section('content')
 
-<div class="text-accueil">Consultez les restaurants de votre choix et choisissez vos mets.</div>
+<link rel="stylesheet" type="text/css" href="{{asset('storage/front/css/style.css')}}">
 
 {{-- presentation des restaurants --}}
-<div class="container">
-   <div class="row h-100 align-items-center">
-    <div class="col-sm-3">
-        <div class="card border border-warning" style="width: 18rem;">
-   @foreach ($companies as $company)
+<section class="product-prev-sec product-list-sec">
+<div class="text-accueil  text-center shadow-lg">Consultez les restaurants de votre choix et choisissez vos mets.</div>
 
-            <img src="{{Storage::url($company->image)}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h3 class="card-title">{{$company->name}}</h3>
-              <hr>
-              <p class="card-text">{{$company->description}}</p>
-              <hr>
-              <p class="card-text">{{$company->specialite}}</p>
+    <div class="container">
 
-              <a href="{{route('mets.index', ['slug'=>$company->slug])}}" class="btn btn-warning">Menu du jour</a>
+        <div class="product-rev-wrap">
+            <div class="cat-product">
+                    <div class="row">
+                         @foreach ($companies as $company)
+                         {{-- container text-center shadow-lg col-8 col-md-6 mb-5 py-4 --}}
+                        <div class="col-xl-3 col-md-4">
+                         <div class="pro-box card border border-warning">
+                             <div class="pro-img">
+                                    <img src='{{Storage::url($company->image)}}' alt="">
 
+                               </div>
+                            <div class="product-details-wrap">
+                                <div class="product-details">
+              <a href="{{route('resto.consulter', ['slug'=>$company->slug])}}"class="btn btn-warning w-100"><strong> {{$company->name}}</strong></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    {{-- $mets = $company->mets()->zinRandomOrder()->paginate(6); --}}
+                    <div>
+                        {!! $companies->links() !!}
+                    </div>
+                </div>
             </div>
-            @endforeach
-          </div>
-    </div>
-            </div>
-
-              </div>
         </div>
-
     </div>
-
 </div>
+{{-- card --}}
+<div class="container">
+    <div class="row">
+   <div class="col-md-4">
+    <div class="card" style="width: 18rem; color: white">
+        <img class="card-img-top" src="{{asset('storage/images/client.jpg')}}" alt="client">
+        <div class="card-body bg-primary">
+          <h5 class="card-title">Nos Clients</h5>
+          <p class="card-text">Faites vos commandes sur dans les restaurants de vos choix.</p>
+        </div>
+      </div>
+   </div>
+   <div class="col-md-4">
+    <div class="card" style="width: 18rem; color: white">
+        <img class="card-img-top" src="{{asset('storage/images/restaurateur.jfif')}}" alt="Restaurateur">
+        <div class="card-body bg-primary">
+          <h5 class="card-title">Nos Partenaires</h5>
+          <p class="card-text">Inscrivez-vous pour etre notre partenaire sur Juna Eats.</p>
+        </div>
+      </div>
+   </div>
 
+<div class="col-md-4">
+   <div class="card" style="width: 18rem; color: white">
+    <img class="card-img-top" src="{{asset('storage/images/livreur.png')}}" alt="Livreur">
+    <div class="card-body bg-primary">
+      <h5 class="card-title">Nos Livreurs</h5>
+      <p class="card-text">Inscrivez-vous pour rejoindre nos livreurs.</p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 @endsection

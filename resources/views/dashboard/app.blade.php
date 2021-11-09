@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
+    {{-- <link rel="stylesheet" href="https://github.com/FortAwesome/Font-Awesome"> --}}
+    {{-- <style>
         .container .bo{
     border: 3px solid red !important;
         }
-        </style>
+        </style> --}}
 
 	<!-- Basic Page Info -->
 	<meta charset="utf-8">
@@ -29,11 +30,6 @@
         <link rel="stylesheet" type="text/css" href="{{asset('css table/main.css')}}">
     <!--===============================================================================================-->
 {{-- end tables --}}
-	<!-- Site favicon -->
-	{{-- <link rel="apple-touch-icon" sizes="180x180" href="{{asset('vendors/images/apple-touch-icon.png')}}"> --}}
-	{{-- <link rel="icon" type="image/png" sizes="32x32" href="{{asset('vendors/images/favicon-32x32.png')}}"> --}}
-	{{-- <link rel="icon" type="image/png" sizes="16x16" href="{{asset('vendors/images/favicon-16x16.png')}}"> --}}
-
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -152,7 +148,8 @@
 					</div>
 				</div>
 			</div>
-
+        </div>
+    </div>
 	</div>
 
 	<div class="right-sidebar">
@@ -244,7 +241,7 @@
                 @endif
             <span class="ml-4">{{ auth()->user()->compte->name ?? 'Nom du resto' }}</span>
 
-			</a>
+			</>
             @endif
 			<div class="close-sidebar" data-toggle="left-sidebar-close">
 				<i class="ion-close-round"></i>
@@ -266,7 +263,7 @@
                     @if(auth()->user()->hasActiveAccount())
                     <li class="dropdown">
 						<a href="javascript:;')}}" class="dropdown-toggle">
-							<span class="icon-reorde"></span><span class="mtext">Catégories</span>
+							<span class="fa fa-ellipsis-v"></span><span class="mtext">Catégories</span>
 						</a>
 						<ul class="submenu">
 							<li><a href="{{route('categories.create')}}">Ajouter une catégorie</a></li>
@@ -275,13 +272,24 @@
 					</li>
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-library"></span><span class="mtext">Menu du jour</span>
+							<span class="fa fa-bars"></span><span class="mtext">Menu du jour</span>
 						</a>
 						<ul class="submenu">
 							<li><a href="{{route('menu.create')}}">Ajouter un mets</a></li>
 							<li><a href="{{route('menu.index')}}">Afficher tous les mets</a></li>
 						</ul>
-					</li>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="fa fa-bars"></span><span class="mtext">Gestion clients</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{route('gestion_client.commande')}}">Afficher les commandes</a></li>
+                        <li><a href="{{route('gestion_client.reservation')}}">Afficher les réservations</a></li>
+                    </ul>
+            </li>
+
                     @endif
                     <li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
@@ -289,7 +297,7 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="{{route('compte.gestion')}}">Gestion de mon espace</a></li>
-                            @if (!auth()->user()->hasActiveAccount())
+                            @if ( auth()->user()->hasAccount() && !auth()->user()->hasActiveAccount())
 							<li><a href="{{route('compte.activer')}}">Activer mon compte</a></li>
                             @endif
 						</ul>
@@ -303,7 +311,9 @@
 						</a>
 						<ul class="submenu">
 							{{-- <li><a href="{{route('abonnement.abonner')}}">Abonner une compagnie</a></li> --}}
-							<li><a href="{{route('abonnement.index')}}">Listes des compagnies</a></li>
+							<li><a href="{{route('abonnement.index')}}">Listes des restaurants</a></li>
+							<li><a href="{{route('abonnement.livreur')}}">Listes des liveurs</a></li>
+
 						</ul>
 					</li>
                     @endif
@@ -314,15 +324,22 @@
 	</div>
 	<div class="mobile-menu-overlay"></div>
 
-	<div class="main-container">
-		<div class="pd-ltr-20">
-			{{--  --}}
+    <div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+ <!-- multiple select row Datatable start -->
+
+				<!-- multiple select row Datatable End -->
+				<!-- Checkbox select Datatable start -->
+
+				<!-- Checkbox select Datatable End -->
+				<!-- Export Datatable start -->
+
+				<!-- Export Datatable End -->
 			</div>
+	@yield('content')
 		</div>
 	</div>
-    <div  style="margin-top: 20px">
-        @yield('content')
-    </div>
 
 	<!-- js -->
 	<script src="{{asset('vendors/scripts/core.js')}}"></script>
@@ -330,12 +347,18 @@
 	<script src="{{asset('vendors/scripts/process.js')}}"></script>
 	<script src="{{asset('vendors/scripts/layout-settings.js')}}"></script>
 	<script src="{{asset('src/plugins/apexcharts/apexcharts.min.js')}}"></script>
-	<script src="{{asset('src/plugins/datatables/js/jquery.dataTables.min.js')}}"></script>
-	<script src="{{asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
-	<script src="{{asset('src/plugins/datatables/js/dataTables.responsive.min.js')}}"></script>
-	<script src="{{asset('src/plugins/datatables/js/responsive.bootstrap4.min.js')}}"></script>
 	<script src="{{asset('vendors/scripts/dashboard.js')}}"></script>
     <!--===============================================================================================-->
+    	<!-- buttons for Export datatable -->
+	<script src="src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+	<script src="src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+	<script src="src/plugins/datatables/js/buttons.print.min.js"></script>
+	<script src="src/plugins/datatables/js/buttons.html5.min.js"></script>
+	<script src="src/plugins/datatables/js/buttons.flash.min.js"></script>
+	<script src="src/plugins/datatables/js/pdfmake.min.js"></script>
+	<script src="src/plugins/datatables/js/vfs_fonts.js"></script>
+	<!-- Datatable Setting js -->
+	<script src="vendors/scripts/datatable-setting.js"></script>
     <!--===============================================================================================-->
         <script src="{{asset('vendor/bootstrap/js/popper.js')}}"></script>
         <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
@@ -357,16 +380,50 @@
 
     <!--===============================================================================================-->
         <script src="{{asset('js table/main.js')}}"></script>
-        <script>
-// tooltip bootstrap
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-})
+        <script src="vendors/scripts/core.js"></script>
+        <script src="vendors/scripts/script.min.js"></script>
+        <script src="vendors/scripts/process.js"></script>
+        <script src="vendors/scripts/layout-settings.js"></script>
+        <script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+        <script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+        <script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+        <script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+        <!-- buttons for Export datatable -->
+        <script src="src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+        <script src="src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+        <script src="src/plugins/datatables/js/buttons.print.min.js"></script>
+        <script src="src/plugins/datatables/js/buttons.html5.min.js"></script>
+        <script src="src/plugins/datatables/js/buttons.flash.min.js"></script>
+        <script src="src/plugins/datatables/js/pdfmake.min.js"></script>
+        <script src="src/plugins/datatables/js/vfs_fonts.js"></script>
+        <!-- Datatable Setting js -->
+        <script src="vendors/scripts/datatable-setting.js"></script>
+        <link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
+        <link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
+        <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
 
-            $('.btn-delete').click(function(){
-                $(this).siblings('.delete-form').submit();
-            });
-        </script>
+        <scri   pt>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-119386393-1');
+        </scri>
+
+
+<script>
+    // tooltip bootstrap
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+                $('.btn-delete').click(function(){
+                    $(this).siblings('.delete-form').submit();
+                });
+</script>
+
 </body>
 </html>

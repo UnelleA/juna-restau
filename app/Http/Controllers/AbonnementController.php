@@ -14,10 +14,11 @@ class AbonnementController extends Controller
         $companies=Compte::all();
         return view('dashboard.abonnement.index', compact('companies'));
     }
-    public function abonner()
-    {
-        return view('dashboard.abonnement.abonner');
-    }
+    // public function abonner()
+    // {
+    //     return view('dashboard.abonnement.abonner');
+    // }
+
     public function store(Request $request)
     {
         if($request->transaction_id){
@@ -62,5 +63,10 @@ class AbonnementController extends Controller
               ->where('id', $compte->id)
               ->update(['status' => 0]);
         return back();
+    }
+
+    public function livreur()
+    {
+        return view('dashboard.abonnement.livreur');
     }
 }

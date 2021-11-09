@@ -1,93 +1,94 @@
 @extends('layouts.master')
+@section('link')
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{{-- <link rel="stylesheet" href="{{asset('assets/css/animate.css')}}"> --}}
+<link rel="stylesheet" href="{{asset('assets/css/meanmenu.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/font-awsome-all.min.css')}}">
+{{-- <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}"> --}}
+<link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/jquery-ui.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('storage/front/css/style.css')}}">
+<style>
+    .bo{
+        border: 4px solid red;
+    }
+</style>
+@endsection
+
 @section('content')
 <!-- CSS Files -->
-<link rel="stylesheet" href="{{('assets/css/animate.css')}}">
-<link rel="stylesheet" href="{{('assets/css/meanmenu.min.css')}}">
-<link rel="stylesheet" href="{{('assets/css/bootstrap.min.css')}}">
-<link rel="stylesheet" href="{{('assets/css/font-awsome-all.min.css')}}">
-<link rel="stylesheet" href="{{('assets/css/magnific-popup.css')}}">
-<link rel="stylesheet" href="{{('assets/css/slick.css')}}">
-<link rel="stylesheet" href="{{('assets/css/jquery-ui.css')}}">
-<link rel="stylesheet" href="{{('assets/css/style.css')}}">
-<link rel="stylesheet" type="text/css" href="storage/front/css/style.css">
 
-{{-- <section class="product-prev-sec product-list-sec"> --}}
-        <div class="container d-flex justify-content-between">
 
-            <div class="product-rev-wrap">
-                <h3 class="text-center">Categories</h3>
-                <div class="cat-aside-wrap">
-                   @foreach ($categories as $category)
-                   {{-- <a href="{{route('categories.show', $category)}}" class="cat-check border-top-no "> --}}
-                   <a href="{{route('mets.index', $category)}}" class="cat-check border-top-no ">
-                    <img src='{{ Storage::url($category->image)}}' alt=""><p>{{ $category->name}}</p>
-                </a>
-                   @endforeach
+
+            <section class="product-prev-sec product-list-sec">
+                <div class="container" style="margin-top: -100px;">
+                    <div class="product-rev-wrap">
+                        <h3 class="text-center">Categories</h3>
+                        <div class="cat-aside-wrap">
+                           @foreach ($categories as $category)
+                           {{-- <a href="{{route('categories.show', $category)}}" class="cat-check border-top-no "> --}}
+                           <a href="{{route('mets.index', $category)}}" class="cat-check border-top-no ">
+                            <img src='{{ Storage::url($category->image)}}' alt=""><p>{{ $category->name}}</p>
+                        </a>
+                           @endforeach
+                        </div>
+                    </div>
+
+             <div class="cat-product" style="margin-left: 300px; margin-top: -200px">
+                <div class="cart-pro-head">
+                    <h2 class="sec-head">Mets</h2>
                 </div>
-            </div>
-{{--
-            <div class="">
-                    <h3 class="">Mets</h3>
-                </div>
-            @foreach ($mets as $met)
-                <div class="col-sm-6 col-xl-4 col-md-6">
-                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                <h6 class="mb-0">{{$met->title}}</h6>
-                <div class="mb-1 text-muted">{{$met->created_at->format('d/m/y')}}</div>
-                <strong style="color: red" class="mb-auto">{{$met->price}}</strong>
+                    <div class="row" id="list_product">
+                @foreach ($mets as $met)
 
-                <form action="{{route('cart.store')}}" method="post">
-                    @csrf
-                    <input type="hidden" name="met_id" value="{{$met->id}}">
-                    <button type="submit" class="btn btn-primary">Ajouter au panier</button>
-                </form>
+                         {{-- <div class="col-xl-4 col-md-6"> --}}
+                        <div class="col-xl-4 col-md-4">
+                         <div class="pro-box">
+                            <h4 style="text-align: center">{{$met->title}}</h4>
+                             <div class="pro-img">
+                                    <img src="{{Storage::url($met->image)}}" alt="">
+                                 </div>
+                            <div class="product-details-wrap">
+                                <div class="product-details">
+                                        <span>{{$met->created_at->format('d/m/y')}}</span>
+                                        <hr>
 
-                </div>
-                </div>
-                </div>
-@endforeach --}}
-
-            <div class="tab-content" id="nav-tabContent col-md-3">
-                            <h3 class="">Mets</h3>
-                            <div class=" col-md-12 col-sm-3 d-flex justify-content-between">
-                                <div class="row d-flex justify-content-between">
-                                <div class="d-flex justify-content-between">
-                            @foreach ($mets as $met)
-                                    <div class="col-lg-3 d-flex justify-content-between"  style="border: 1px solid gray;">
-                                      <div>{{$met->created_at->format('d/m/y')}}</div>
-                                        <div class="single-menu-item">
-                                            <div class="menu-img">
-                                                <img src="{{Storage::url($met->image)}}" alt="" class="mw-100">
-                                            </div>
-                                            <div class="menu-content">
-                                                <strong>{{$met->title}}</strong>
-                                                <p>{{$met->description}}</p>
-                                                <span style="color: red">{{$met->price}}</span>
-                                                <form action="{{route('cart.store')}}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="met_id" value="{{$met->id}}">
-                                                    <button style="margin-top: 10px" type="submit" class="btn btn-primary">Ajouter au panier</button>
-                                                </form>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                @endforeach
-
+                                        <hr>
+                                    <p class="pro-pricing">
+                                        {{$met->price}}
+                                    </p>
+                                </div>
+                                <hr>
+                                <div class="product-details">
+                                    <p>{{$met->description}}</p>
                                 </div>
 
                             </div>
-                        {{-- </div> --}}
-                            {{-- </div> --}}
+                            {{-- <form id="myformcart"  novalidate="">
+                                @csrf
+                                <input type="hidden" name="met_id" value="{{$met->id}}">--}}
+                                <div class="row d-flex justify-content-around">
+                                    <button  class=" mx-0 btn btn-sm btn-primary ajout" id="ajout{{$met->id}}" data-id="{{$met->id}}" style="margin-top: 20px; margin-left: 50px" >Ajouter au panier</button>
+                                <button  class=" mx-0 btn btn-sm btn-success reservation" id="reservation{{$met->id}}" data-id="{{$met->id}}" style="margin-top: 20px; margin-left: 50px" >Réserver</button>
+                                </div>
+                            {{-- </form> --}}
                         </div>
-</div>
-    </div>
+                    </div>
+                    @endforeach
+                    <div>
+                        {!! $mets->links() !!}
+                    </div>
 
-{{-- </section> --}}
- </div>
-
-<!-- Javascript Files -->
+                </div>
+            </div>
+        </div>
+    </div></div>
+@endsection
+@section('script')
 <script src="{{asset('assets/js/vendor/jquery-2.2.4.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/jquery.meanmenu.min.js')}}"></script>
@@ -102,3 +103,25 @@
 <script src="{{asset('assets/js/vendor/wow.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
