@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('content')
 @if($count >0)
-@include('laravel-bootstrap-toasts::message')
 <div class="px-4 px-lg-0">
     <div class="pb-5">
       <div class="container">

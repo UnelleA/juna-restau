@@ -33,8 +33,8 @@
                     <td class="cart-title first-row">
                         <h5>{{ $met->model->title }}</h5>
                     </td>
-                      <td class="p-price first-row">{{ $met->model->price}}</td>
-                      <td class="cart-title first-row" ><input type="number" min="1" value="1" name="qty" class="qty col-3" data-id="{{ $met->rowId}}"
+                      <td class="p-price first-row">{{ $met->model->price}} F CFA</td>
+                      <td class="cart-title first-row" ><input type="number" min="1" value="{{ $met->qty}}" name="qty" class="qty col-3" data-id="{{ $met->rowId}}"
                          class="custom-select" id="inputGroupSelect03">
 
                       <p class="item-price" data-price="{{ $met->model->price}}"></p>
@@ -42,7 +42,7 @@
                           {{-- mettre ajout la quantite du panier --}}
 
                     <td class="sous-total-{{ $met->rowId}}">
-        {{( $met->model->price)}}
+        {{ $met->model->price *  $met->qty}}
                     </td>
                       <form action="{{ route('cart.destroy', $met->rowId) }}" method="post">
                             @csrf
@@ -82,7 +82,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
+        </div> 
         <div class="modal-body">
          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="note"></textarea>
         </div>
@@ -106,22 +106,35 @@
                 <button class="btn btn-primary" type="button"><a href="{{route('home')}}" style="color: white">Continuer mes achats</a></button>
 
                 {{--livraison  --}}
+
+
+                @auth
                 <span>Voulez-vous etre livré ?</span>
-  <button type="button" class="btn btn-primary btn-sm" data-id="{{ $met->model->id}}"data-toggle="modal"
-     data-target="#confirmCmd">oui</button>
-                <button type="button" class="btn btn-secondary btn-sm"><a href="{{route('login')}}"><span  style="color: white">non</span></a></button>
+                <button type="button" class="btn btn-primary btn-sm" data-id="{{ $met->model->id}}"data-toggle="modal" data-target="#confirmCmd">oui</button>
+                    <button type="button" style="color: white" class="btn btn-secondary btn-sm btn-non" data-id="" data-toggle="modal" data-target="#non">non</button>
+                @endauth
+
+                @guest
+                <a href="{{ route('login')}}" class="btn btn-primary btn-sm" >Connecter vous pour finaliser votre achat</a>
+
+                @endguest
+
+     {{-- modal du oui --}}
   <div class="modal fade" id="confirmCmd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 90000">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Veuillez renseignez un lieu de livraison.</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Veuillez remplir les champs suivants:</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-
+       <form action="">
             @csrf
+            <div>
+                <small id="message-error" class="text-danger text-italic"></small>
+            </div>
             <div class="form-group row">
                 <label for="lieu" class="col-md-4 col-form-label text-md-right">{{ __('Lieu de livraison') }}</label>
 
@@ -136,15 +149,92 @@
                     @enderror
                 </div>
             </div>
+
+
+
+            <div class="form-group row">
+                <label for="ville" class="col-md-4 col-form-label text-md-right">{{ __('Ville du lieu') }}</label>
+
+                <div class="col-md-6">
+                    <select id="ville" class="form-control @error('ville') is-invalid @enderror"
+                     name="ville" value="{{ old('ville') }}" required autocomplete="ville" autofocus>
+
+                    <option value="">Choisissez la ville</option>
+                                        @foreach($ville as $Ville)
+                    <option value="{{$Ville->id}}" >{{$Ville->nom}}</option>
+                                        @endforeach
+                                    </select>
+                                        @error('ville')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                </div>
+            </div>
         </form>
+
+
         </div>
         <div class="modal-footer">
-            {{-- <button type="button"  class="kkiapay-button btn btn-primary">Validez</button> --}}
-          <button type="button" class="btn btn-primary"><a href="{{route('login')}}"></a>Soumettre</button>
+            {{-- faire sortir la facture de sa commande avec lieu de livraison --}}
+            <button type="summit" style="color: white"  class="btn btn-secondary btn-sm btn-soumet" data-id="" data-toggle="modal" data-target="#soumet">Soumettre</button>
         </div>
       </div>
     </div>
   </div>
+
+  {{-- modal du boutton soumettre --}}
+  <div class="modal fade" id="soumet" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 90000">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Procéder au paiement</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center" >
+            <p>Sous-total du panier: <strong> {{ Cart::subtotal() }} </strong></p>
+            <p>Frais de livraison: <strong id="delivery-fees"> </strong></p>
+            <p>Montant total à payer : <strong id="total-amount"></strong></p>
+            <p>
+                {{-- <strong id="modal-non"></strong> --}}
+            </p>
+            <p>
+        <button style="margin-left: 800px" type="button"  class="kkiapay-button btn btn-primary rounded mx-auto my-4">Passez au paiement</button>
+            </p>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{-- modal du non --}}
+  <div class="modal fade" id="non" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 90000">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Procéder au paiement</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center" >
+            <p>Montant total à payer :</p>
+            <p>
+                <strong id="modal-non"></strong>
+            </p>
+            <p>
+        <button style="margin-left: 800px" type="button"  class="kkiapay-button btn btn-primary rounded mx-auto my-4">Passez au paiement</button>
+            </p>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
             </div>
           </div>
         </div>
@@ -166,10 +256,12 @@
 {{-- sdk kkiapay --}}
 <script src="https://cdn.kkiapay.me/k.js"></script>
 
-<script amount="250"
-    callback=""
+<script id="paymentOperator" amount=""
+    callback="{{ route('payement.reussi') }}"
     data=""
-    url=""
+    name="{{ auth()->user()->name ?? '' }}"
+    {{-- phone="{{ auth()->user()->contact ?? '' }}"
+    url="{{asset('storage/images/logoJR.png')}}" --}}
     position="center"
     theme="#0000FF"
     sandbox="true"

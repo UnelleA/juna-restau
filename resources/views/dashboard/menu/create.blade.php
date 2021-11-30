@@ -4,7 +4,7 @@
 .container form {
 
 border: 1px solid white;
-box-shadow:box-shadow: 10px 10px 10px white;
+box-shadow: 1px 1px 2px 2px black;
 margin-left: 280px;
 background-color: dark-gray;
 width: 500px;

@@ -37,15 +37,15 @@
                     <div class="col-md-4 text-center">
                         <p>Cliquez sur le boutton <strong>Menu du jour</strong> pour voir le menu du restaurant.</p>
                         <hr>
-                        <p>Cliquez sur le boutton <strong>S'abonner</strong> pour vous abonner à ce restaurant. <br> Vous recevrez les notifications des menus de ce restaurant tous les jours dans votre mail.</p>
+                        {{-- <p>Cliquez sur le boutton <strong>S'abonner</strong> pour vous abonner à ce restaurant. <br> Vous recevrez les notifications des menus de ce restaurant tous les jours dans votre mail.</p> --}}
                         <hr>
                         <p>Cliquez sur le boutton <strong>Visiter le restaurant</strong> pour voir ce restaurant en 3D.</p>
                     </div>
           </div>
        <div class="row">
         <div class="col-md-4"><a href="{{route('mets.index',['slug'=>$company->slug])}}" class="btn btn-warning">Menu du jour</a></div>
-        <div class="col-md-4"><a href="{{route('login')}}" class="btn btn-primary">S'abonner</a></div>
-        <div class="col-md-4"><a href="{{route('login')}}" class="btn btn-primary">Visiter le restaurant</a></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><a href="{{route('resto.show_resto' ,['slug'=>$company->slug])}}" class="btn btn-primary">Voir en 3D</a></div>
        </div>
         </div>
 

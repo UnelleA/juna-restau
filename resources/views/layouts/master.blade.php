@@ -6,7 +6,7 @@
     {{-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     {{-- fontawesome --}}
     <link rel="stylesheet" href="{{asset('path/to/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="icon" href="{{asset('favicon.ico')}}" type="image/x-icon">
+    {{-- <link rel="icon" href="{{asset('favicon.ico')}}" type="image/x-icon"> --}}
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <!-- Icofont CSS -->
@@ -49,24 +49,26 @@
                         <i class="icofont-navigation-menu"></i>
                     </button>
 
-                    <div style="margin-left: 550px; margin-top: 20px; height:30px;" class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div style="margin-left: 35rem; margin-top: 4rem; height:7rem;" class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav navbar-custom">
                             <li class="nav-item active">
                                 <a class="nav-link" href="/">Accueil </a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Restaurants</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    {{-- <a class="dropdown-item" href="{{route('mets.index', )}}"></a> --}}
-                                </div>
+                            <li class="nav-item">
+                                @auth
+                                <a class="nav-link" style="cursor: pointer;" onclick="document.getElementById('logout').submit();">Déconnexion</a>
+                                <form action="{{route('logout')}}" method="post" id="logout">
+                                    @csrf
+                                </form>
+                                @endauth
+                                @guest
+                                <a class="nav-link" href="/login">Connexion</a>
+                                @endguest
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('contact.index')}}">Contact</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login">Connexion</a>
-                            </li>
+
                         </ul>
                     </div>
                     {{-- panier --}}
@@ -76,9 +78,14 @@
                     {{-- reservation --}}
                     <div class="open-time">
                         <span style="color: yellow; margin-left:3rem;  "><label id="count_reserver">
-                            {{-- @php
-                             echo count(session('reservation') );
-                            @endphp --}}
+                             @php
+                             if(session('reservation') != null){
+                                                              echo count(session('reservation') );
+
+                             }else {
+                                 echo '0';
+                             }
+                            @endphp
                             </label> <a class="icofont-ticket" href="{{route('reservations.index')}}" style="color: yellow; margin-left:3rem; "></a></span>
                     </div>
                 </nav>
@@ -94,7 +101,7 @@
     @endif
 
     <!-- HERO SECTION START -->
- <div class="offer-section" style="margin-top:-100px">
+ <div class="offer-section" style="margin-top:-5rem">
 
     <div class="row">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:15%">
@@ -106,7 +113,7 @@
             </ol>
 
             <!-- Wrapper for slides -->
-            <div class="carousel-inner" style="height: 450px">
+            <div class="carousel-inner" style="height: 45rem">
               <div class="item active">
                 <img src="{{asset('storage/images/r2.jpg')}}" alt="Chania">
                 <div class="carousel-caption">
@@ -159,14 +166,11 @@
 
     <div id="container">
         <div id="part1">
-            {{-- <p id="txt1">NOS SERVICES</p> --}}
             <div id="companyinfo" class="col"> <a id="slink" href="#">
                 <img src="{{asset('storage/images/logoJR.png')}}" alt="" width="160" height="100"></a>
                <p id="title">Juna Eats &hearts;</p>
                 <p id="detail">Votre satisfaction est notre tranquillité !!!</p>
             </div>
-            {{-- <hr style="width: 1px; height: 20px; display: inline-block;"> --}}
-
             <div id="explore">
                 <p id="txt1">NOS SERVICES</p>
                  <p id="detail">Divers plats culinaires pour nos clients.</p> <br>
@@ -204,6 +208,15 @@
             </i>Copyright {{date('Y')}} - Tous droits réservés | Juna Eats
             </p>
         </div>
+{{-- icons reseaux --}}
+        {{-- <div>
+            <ul class="mt-3 footer-social">
+                <li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
+                <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
+                <li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
+                <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
+              </ul>
+        </div> --}}
     </div>
 </footer>
 {{-- end footer --}}
@@ -221,6 +234,7 @@
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- main.js -->
     <script src="{{asset('js/main.js')}}"></script>
+
 {{-- cart --}}
     <script>
         $('.qty').on('change', function(){
@@ -253,7 +267,68 @@
             })
 
 
+            //livraison non
+
+
         });
+        $('.btn-non').click(function(){
+            $.ajax({
+                url: "{{ route('delivery.no')}}",
+                type: "get",
+                dataType:"json",
+                data:"",
+                success: function(response){
+                    console.log(response);
+
+                    $('#modal-non').text(response + ' F CFA');
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            })
+        })
+        //livraison oui
+
+        $('.btn-soumet').click(function(event){
+            var location=$('#lieu').val(),
+                city=$('#ville').val(),
+                isvalid=true;
+            if(location =='' && city ==''){
+                event.preventDefault();
+                isvalid=false;
+                $('#message-error').text("Veillez renseigner votre lieu de livraison et la ville");
+            }
+            $.ajaxSetup({
+                headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+            });
+
+            $.ajax({
+                url: "{{ route('delivery.yes')}}",
+                type: "post",
+                dataType:"json",
+                data:{
+                    location,
+                    city
+                },
+                success: function(response){
+                    console.log(response);
+
+                    $('#delivery-fees').text(response.deliveryFees + ' F CFA');
+                    $('#total-amount').text(response.totalAmount + ' F CFA');
+                    $('#paymentOperator').attr('amount', response.totalAmount);
+                    var total=$('#paymentOperator').attr('amount');
+                    console.log('Total à payer', total);
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            })
+
+        })
+
+
     </script>
 
 {{-- reservation --}}
@@ -352,7 +427,7 @@ $('.ajout').click(function(){
 
 
 
-                alert(response.success);
+             //   alert(response.success);
             }else if(response.modif){
                 alert(response.modif);
             }

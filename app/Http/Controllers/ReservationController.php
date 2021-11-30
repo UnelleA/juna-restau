@@ -14,7 +14,11 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+
+
+
+     public function index()
     {
         $count=0;
         $reservations=[];
@@ -61,6 +65,7 @@ class ReservationController extends Controller
                     session()->push('reservation', $met);
                 }
             }
+
         }else{
             session()->put('reservation',[ $met]);
         }

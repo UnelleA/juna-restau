@@ -16,6 +16,8 @@ class Compte extends Model
         'slug',
         'specialite',
         'description',
+        'video',
+
         // 'video',
     ];
 

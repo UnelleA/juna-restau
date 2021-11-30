@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\met;
 use App\Models\Category;
+use App\Models\Commande;
 use Illuminate\Http\Request;
 
 class GestionClientController extends Controller
 {
     public function commande()
     {
-        return view('dashboard.gestion_client.commande');
+        $commandes=Commande::where('compte_id',auth()->user()->compte->id)->get();
+        return view('dashboard.gestion_client.commande', compact('commandes'));
+
     }
 
 

@@ -5,7 +5,7 @@
     .container form {
 
 border: 1px solid white;
-box-shadow:box-shadow: 10px 10px 10px white;
+box-shadow: 1px 1px 2px 2px black;
 margin-left: 280px;
 background-color: dark-gray;
 width: 500px;
@@ -32,7 +32,7 @@ margin-left: 170px;
         @if ( auth()->user()->compte)
         <input type="text" class="form-control" id="text" name="name" value="{{ auth()->user()->compte->name ?? ''}}" placeholder="Nom de la compagnie">
         @else
-        <input type="text" class="form-control" id="text" name="name" placeholder="Nom de  la compagnie">
+        <input type="text" class="form-control" id="text" name="name" placeholder="Nom de la compagnie">
 
         @endif
         @error('name')
@@ -74,6 +74,19 @@ margin-left: 170px;
     {{ $errors->first('image')}}
     @enderror
   </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Image du restaurant en 3D:</label>
+    @if ( auth()->user()->compte)
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="video" value="{{ auth()->user()->compte->video ?? ''}}">
+    @else
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="video">
+    @endif
+    @error('video')
+    {{ $errors->first('video')}}
+    @enderror
+  </div>
+
   @if ( auth()->user()->compte)
   <button type="submit" class="btn btn-primary">Enregistrer Les Modifications</button>
   @else

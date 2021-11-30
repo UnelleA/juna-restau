@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\met;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\Ville;
+use App\Models\Livraison;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use illuminate\Support\Facades\Session;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
@@ -16,9 +19,34 @@ class CartController extends Controller
      */
     public function index()
     {
-        // dd('ok');
+         session()->put('redirectback', route('cart.index'));
         // dd(Cart::count());
-        return view('cart.index');
+        //$ville =  Ville::all();
+
+        $ville=[];
+        if (Cart::count()>0) {
+            $met=Cart::content()->first();
+            $ville=DB::table('villes')->join('livraisons', 'villes.id', '=', 'livraisons.ville_id')->where('restaurant_id', $met->model->compte_id)->get();
+        }
+        return view('cart.index', compact('ville'));
+    }
+    public function deliverIsNo(){
+        $amount=Cart::total();
+        return $amount;
+    }
+
+    public function deliverIsYes(Request $request){
+        $deliveryFees=Livraison::where('id', $request->city)->first();
+        $deliveryFees= $deliveryFees !=null ? $deliveryFees->cout : 0;
+        $city=Ville::find($deliveryFees->ville_id);
+            session()->put('deliveryInfo',[
+                'city'=>$city->nom,
+                'location'=>$request->location,
+                'amount'=>$deliveryFees
+            ]);
+        $amount=Cart::subtotal() + $deliveryFees;
+
+        return response()->json(['deliveryFees' => $deliveryFees, 'totalAmount'=>$amount]);
     }
 
     /**
@@ -39,7 +67,7 @@ class CartController extends Controller
     {
         //
     //    dd($request->id, $request->title, $request->price);
-       $duplicate = Cart::search(function ($cartItem, $rowId) use ($request) { //rechercher un metS dans notre panier
+       $duplicate = Cart::search(function ($cartItem, $rowId) use ($request) { //rechercher un mets dans notre panier
             return $cartItem->id == $request->met_id;
        });
         if ($duplicate->isNotEmpty()) {
@@ -92,7 +120,7 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $data = $request->json()->all();
-        Cart::update($request->Id, $request->qty);
+        Cart::update($request->Id, (int) $request->qty);
         $subtotal=getPrice(Cart::subtotal());
         // dd($request->qty);
 

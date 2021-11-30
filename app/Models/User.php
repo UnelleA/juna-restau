@@ -58,6 +58,10 @@ class User extends Authenticatable
     {
        return $this->hasMany(Notification::class);
     }
+    public function commandes()
+    {
+       return $this->hasMany(Commande::class);
+    }
 
     public function hasActiveAccount(){
         if($this->compte){

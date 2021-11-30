@@ -1,12 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
+
 namespace App\Http\Controller\Auth;
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class HomeController extends Controller
 {
@@ -27,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // dd('ok');
         switch (auth()->user()->type) {
             case 0:
 

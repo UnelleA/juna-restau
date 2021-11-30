@@ -5,10 +5,10 @@
 
 {{-- presentation des restaurants --}}
 <section class="product-prev-sec product-list-sec">
-<div class="text-accueil  text-center shadow-lg">Consultez les restaurants de votre choix et choisissez vos mets.</div>
 
-    <div class="container">
-
+    <div class="container center-block">
+        <div class="text-accueil  text-center">Consultez les restaurants de votre choix et choisissez vos mets.</div>
+<hr>
         <div class="product-rev-wrap">
             <div class="cat-product">
                     <div class="row">
@@ -38,15 +38,17 @@
         </div>
     </div>
 </div>
+<hr>
+
 {{-- card --}}
-<div class="container">
+<div class="container center-block">
     <div class="row">
    <div class="col-md-4">
     <div class="card" style="width: 18rem; color: white">
-        <img class="card-img-top" src="{{asset('storage/images/client.jpg')}}" alt="client">
+        <img class="card-img-top" src="{{asset('storage/images/client.jfif')}}" alt="client">
         <div class="card-body bg-primary">
-          <h5 class="card-title">Nos Clients</h5>
-          <p class="card-text">Faites vos commandes sur dans les restaurants de vos choix.</p>
+          <h5 class="card-title">Chers clients,</h5>
+          <p class="card-text">faites vos commandes dans les restaurants de vos choix.</p>
         </div>
       </div>
    </div>
@@ -54,8 +56,8 @@
     <div class="card" style="width: 18rem; color: white">
         <img class="card-img-top" src="{{asset('storage/images/restaurateur.jfif')}}" alt="Restaurateur">
         <div class="card-body bg-primary">
-          <h5 class="card-title">Nos Partenaires</h5>
-          <p class="card-text">Inscrivez-vous pour etre notre partenaire sur Juna Eats.</p>
+          <h5 class="card-title">Chers restaurateurs,</h5>
+          <p class="card-text">inscrivez-vous pour devenir notre partenaire sur Juna Eats.</p>
         </div>
       </div>
    </div>
@@ -64,11 +66,13 @@
    <div class="card" style="width: 18rem; color: white">
     <img class="card-img-top" src="{{asset('storage/images/livreur.png')}}" alt="Livreur">
     <div class="card-body bg-primary">
-      <h5 class="card-title">Nos Livreurs</h5>
-      <p class="card-text">Inscrivez-vous pour rejoindre nos livreurs.</p>
+      <h5 class="card-title">Chers livreurs,</h5>
+      <p class="card-text">inscrivez-vous pour rejoindre nos livreurs.</p>
     </div>
   </div>
 </div>
 </div>
 </div>
+<hr>
+
 @endsection

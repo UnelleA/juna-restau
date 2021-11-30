@@ -4,14 +4,16 @@
         <div class="pd-20">
             <h4 class="text-blue" style="text-align: center">Liste des categories.</h4>
         </div>
-        <div class="pb-20">
-            <table class="data-table table hover multiple-select-row nowrap">
+        <div class="pb-20 table-responsive">
+            <table class="table hover multiple-select-row nowrap">
                 <thead>
                     <tr class="row100 head">
                         <th class="cell100 column1">Numero</th>
                         <th class="cell100 column2">Nom de la categorie</th>
                         <th class="cell100 column3">Image de la categorie</th>
                         <th class="cell100 column4">Action</th>
+                        <th class="cell100 column5">ID</th>
+
                     </tr>
                 </thead>
                     <tbody>
@@ -36,6 +38,8 @@
                                       </form>
                                     </div>
                             </td>
+                            <td class="cell100 column5">{{$category->id}}</td>
+
                         </tr>
                         @endforeach
                     </tbody>

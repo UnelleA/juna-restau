@@ -23,15 +23,13 @@
 <!-- CSS Files -->
 
 
-
             <section class="product-prev-sec product-list-sec">
                 <div class="container" style="margin-top: -100px;">
                     <div class="product-rev-wrap">
                         <h3 class="text-center">Categories</h3>
                         <div class="cat-aside-wrap">
                            @foreach ($categories as $category)
-                           {{-- <a href="{{route('categories.show', $category)}}" class="cat-check border-top-no "> --}}
-                           <a href="{{route('mets.index', $category)}}" class="cat-check border-top-no ">
+                           <a href="{{route('mets.show', ['slug'=>$slug, 'category'=>$category->id])}}" class="cat-check border-top-no ">
                             <img src='{{ Storage::url($category->image)}}' alt=""><p>{{ $category->name}}</p>
                         </a>
                            @endforeach
@@ -72,8 +70,8 @@
                                 @csrf
                                 <input type="hidden" name="met_id" value="{{$met->id}}">--}}
                                 <div class="row d-flex justify-content-around">
-                                    <button  class=" mx-0 btn btn-sm btn-primary ajout" id="ajout{{$met->id}}" data-id="{{$met->id}}" style="margin-top: 20px; margin-left: 50px" >Ajouter au panier</button>
-                                <button  class=" mx-0 btn btn-sm btn-success reservation" id="reservation{{$met->id}}" data-id="{{$met->id}}" style="margin-top: 20px; margin-left: 50px" >Réserver</button>
+                                    <button  class=" mx-0 btn btn-sm btn-primary ajout" id="ajout{{$met->id}}" data-id="{{$met->id}}" style="margin-top: 1rem; margin-left: 5rem; weight:3px" >Ajouter au panier</button>
+                                <button  class=" mx-0 btn btn-sm btn-warning reservation" id="reservation{{$met->id}}" data-id="{{$met->id}}" style="margin-top: 1rem; margin-left: 5rem" >Réserver</button>
                                 </div>
                             {{-- </form> --}}
                         </div>
@@ -102,6 +100,8 @@
 <script src="{{asset('assets/js/vendor/easing.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/wow.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 @endsection
 
 

@@ -1,32 +1,26 @@
 @extends('dashboard.app')
 @section('content')
-<div>
-    <div class="container">
 
-<div class="limiter container">
-    <div class="container-table100">
-        <div class="wrap-table100">
-            <div class="table100 ver1 m-b-110">
-                <div class="table100-head">
-                    <table>
-                        <thead>
-                            <tr class="row100 head">
-                                <th class="cell100 column1">Numero</th>
-                                <th class="cell100 column2">Nom de la Compagnie</th>
-                                <th class="cell100 column3">Status</th>
-                                <th class="cell100 column4">Action</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
 
-                <div class="table100-body js-pscroll">
-                    <table>
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue" style="text-align: center">Liste des restaurants.</h4>
+    </div>
+    <div class="pb-20">
+        <table class="table hover multiple-select-row nowrap">
 
-                        <tbody>
-                            @foreach ($companies as $company)
+            <thead>
+                <tr class="row100 head">
+                    <th class="cell100 column1">Numero</th>
+                    <th class="cell100 column2">Date d'abonnement</th>
+                    <th class="cell100 column3">Nom du livreur</th>
+                    <th class="cell100 column4">Action</th>
+                </tr>
+            </thead>
+                <tbody>
+                    {{-- @foreach ($companies as $company)
 
-                              <tr class="row100 body">
+                            <tr class="row100 body">
                                 <td class="cell100 column1">{{$loop->index +1}}</td>
                                 <td class="cell100 column2">{{$company->name}}</td>
                                 <td class="cell100 column3">
@@ -60,16 +54,13 @@
                                 </td>
                             </tr>
 
-                            @endforeach
-
-                             </tbody>
-
-                    </table>
-                </div>
-            </div>
-        </div>
+                            @endforeach --}}
+                </tbody>
+        </table>
     </div>
 </div>
-</div>
-</div>
+
 @endsection
+
+
+

@@ -1,11 +1,11 @@
 @extends('dashboard.app')
 @section('content')
     <div class="card-box mb-30">
-        <div class="pd-20">
+        <div class="pd-20 table-responsive">
             <h4 class="text-blue" style="text-align: center">Liste des mets.</h4>
         </div>
         <div class="pb-20">
-            <table class="data-table table hover multiple-select-row nowrap">
+            <table class=" table hover multiple-select-row data-export nowrap">
                 <thead>
                     <tr class="row100 head">
                         <th class="cell100 column1">Numero</th>
@@ -14,6 +14,8 @@
                         <th class="cell100 column4">Description</th>
                         <th class="cell100 column5">Image</th>
                         <th class="cell100 column6">Action</th>
+                        <th class="cell100 column7">categories</th>
+
                     </tr>
                 </thead>
                     <tbody>
@@ -25,7 +27,7 @@
                             <td class="cell100 column4">{{$met->description}}</td>
                             <td class="cell100 column5">
                                 <div class="col-8 offset-2">
-                                    <img src="{{Storage::url($met->image)}}" alt="" class="mw-100">
+                                    <img src="{{Storage::url($met->image)}}" alt="" class="rounded img-fluid" style=" width: auto; height: auto;">
                                 </div>
                             </td>
                             <td class="cell100 column6" style="margin-top: 50px">
@@ -39,6 +41,7 @@
                                       </form>
                                     </div>
                             </td>
+                            <td class="cell100 column7">{{ $met->category->name}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -46,5 +49,5 @@
         </div>
     </div>
 
-    
+
 @endsection

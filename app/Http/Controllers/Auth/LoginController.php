@@ -42,30 +42,33 @@ protected $redirectTo;
 
     public function redirectTo()
     {
-        switch (Auth::user()->type) {
-        case 0:
-            $this->redirectTo = '/dashboard';
-            return $this->redirectTo;
-        break;
-
-        case 1:
-            $this->redirectTo = '/dashboard';
-            return $this->redirectTo;
-        break;
-
-        case 2:
-            $this->redirectTo = '/dashboard';
-            return $this->redirectTo;
-        break;
-
-        case 3:
-            $this->redirectTo = '/dashboard';
-            return $this->redirectTo;
-        break;
-        default:
-        $this->redirectTo = '/login';
+        $route= session('redirectback') ?? '/dashboard';
+         $this->redirectTo=$route;
         return $this->redirectTo;
-        }
+        // switch (Auth::user()->type) {
+        // case 0:
+        //     $this->redirectTo = '/dashboard';
+        //     return $this->redirectTo;
+        // break;
+
+        // case 1:
+        //     $this->redirectTo = '/dashboard';
+        //     return $this->redirectTo;
+        // break;
+
+        // case 2:
+        //     $this->redirectTo = '/dashboard';
+        //     return $this->redirectTo;
+        // break;
+
+        // case 3:
+        //     $this->redirectTo = '/dashboard';
+        //     return $this->redirectTo;
+        // break;
+        // default:
+        // $this->redirectTo = '/login';
+        // return $this->redirectTo;
+        //}
       }
     }
 

@@ -4,8 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommandesTable extends Migration
+class AddVideoColumnToComptesTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -13,9 +14,9 @@ class CreateCommandesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commandes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('comptes', function (Blueprint $table) {
+            $table->string('video');
+
         });
     }
 
@@ -26,6 +27,9 @@ class CreateCommandesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commandes');
+        Schema::table('comptes', function (Blueprint $table) {
+           $table->dropColumn('video');
+
+        });
     }
 }

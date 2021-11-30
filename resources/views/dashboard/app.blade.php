@@ -121,7 +121,7 @@
 						<span class="user-icon">
 							<img src="{{asset('storage/images/c1.jfif')}}" alt="">
 						</span>
-						<span class="user-name">
+						<span class="user-name" style="font-size: 2em">
 						@auth()
 							{{auth()->user()->name}}
 						@endauth</span>
@@ -166,14 +166,14 @@
 			<div class="right-sidebar-body-content">
 				<h4 class="weight-600 font-18 pb-10">Header Background</h4>
 				<div class="sidebar-btn-group pb-30 mb-10">
-					<a href="javascript:void(0);')}}" class="btn btn-outline-primary header-white active">White</a>
-					<a href="javascript:void(0);')}}" class="btn btn-outline-primary header-dark">Dark</a>
+					<a href="javascript:void(0);" class="btn btn-outline-primary header-white active">White</a>
+					<a href="javascript:void(0);" class="btn btn-outline-primary header-dark">Dark</a>
 				</div>
 
 				<h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
 				<div class="sidebar-btn-group pb-30 mb-10">
-					<a href="javascript:void(0);')}}" class="btn btn-outline-primary sidebar-light ">White</a>
-					<a href="javascript:void(0);')}}" class="btn btn-outline-primary sidebar-dark active">Dark</a>
+					<a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
+					<a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark active">Dark</a>
 				</div>
 
 				<h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
@@ -235,13 +235,11 @@
             <a href="{{route('dashboard')}}">
 				{{-- <img src="{{asset('storage/images/11.jpg')}}" alt="" class="dark-logo"> --}}
                 @if (auth()->user()->compte)
-                <img style="height: 50px; width:50px" src="{{asset('storage/'.auth()->user()->compte->image )}}" alt="" class="light-logo">
+                <img style="height: 5rem; width:5rem" src="{{asset('storage/'.auth()->user()->compte->image )}}" alt="" class="light-logo">
                 @else
-                <img style="height: 50px; width:50px" src="{{asset('storage/images/food2.png')}}" alt="" class="light-logo">
+                <img style="height: 4rem; width:5rem" src="{{asset('storage/images/food2.png')}}" alt="" class="light-logo">
                 @endif
-            <span class="ml-4">{{ auth()->user()->compte->name ?? 'Nom du resto' }}</span>
-
-			</>
+            <span  style="font-size: 0.7em" class="ml-4">{{ auth()->user()->compte->name ?? 'Nom du resto' }}</span>
             @endif
 			<div class="close-sidebar" data-toggle="left-sidebar-close">
 				<i class="ion-close-round"></i>
@@ -251,7 +249,7 @@
 			<div class="sidebar-menu">
 				<ul id="accordion-menu">
 					<li class="dropdown">
-						<a href="javascript:;')}}" class="dropdown-toggle">
+						<a href="javascript:;" class="dropdown-toggle">
 							<span class="mtext">Aller à</span>
 						</a>
 						<ul class="submenu">
@@ -262,7 +260,7 @@
 					@if(auth()->user()->type ==2 )
                     @if(auth()->user()->hasActiveAccount())
                     <li class="dropdown">
-						<a href="javascript:;')}}" class="dropdown-toggle">
+						<a href="javascript:;" class="dropdown-toggle">
 							<span class="fa fa-ellipsis-v"></span><span class="mtext">Catégories</span>
 						</a>
 						<ul class="submenu">
@@ -280,9 +278,18 @@
 						</ul>
                 </li>
 
+                {{-- <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="fa fa-bars"></span><span class="mtext">Video</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{route('compte.create')}}">image resto</a></li>
+                    </ul>
+            </li> --}}
+
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="fa fa-bars"></span><span class="mtext">Gestion clients</span>
+                        <span class="fa fa-user"></span><span class="mtext">Gestion clients</span>
                     </a>
                     <ul class="submenu">
                         <li><a href="{{route('gestion_client.commande')}}">Afficher les commandes</a></li>
@@ -307,7 +314,7 @@
                     @if(auth()->user()->type==0)
                     <li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-library"></span><span class="mtext">Mes compagnies</span>
+							<span class="micon dw dw-user"></span><span class="mtext">Mes compagnies</span>
 						</a>
 						<ul class="submenu">
 							{{-- <li><a href="{{route('abonnement.abonner')}}">Abonner une compagnie</a></li> --}}
@@ -326,7 +333,7 @@
 
     <div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
-			<div class="min-height-200px">
+			<div class="min-height-20rem">
  <!-- multiple select row Datatable start -->
 
 				<!-- multiple select row Datatable End -->
@@ -379,38 +386,38 @@
         </script>
 
     <!--===============================================================================================-->
-        <script src="{{asset('js table/main.js')}}"></script>
-        <script src="vendors/scripts/core.js"></script>
-        <script src="vendors/scripts/script.min.js"></script>
-        <script src="vendors/scripts/process.js"></script>
-        <script src="vendors/scripts/layout-settings.js"></script>
-        <script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-        <script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-        <script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-        <!-- buttons for Export datatable -->
-        <script src="src/plugins/datatables/js/dataTables.buttons.min.js"></script>
-        <script src="src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
-        <script src="src/plugins/datatables/js/buttons.print.min.js"></script>
-        <script src="src/plugins/datatables/js/buttons.html5.min.js"></script>
-        <script src="src/plugins/datatables/js/buttons.flash.min.js"></script>
-        <script src="src/plugins/datatables/js/pdfmake.min.js"></script>
-        <script src="src/plugins/datatables/js/vfs_fonts.js"></script>
-        <!-- Datatable Setting js -->
-        <script src="vendors/scripts/datatable-setting.js"></script>
-        <link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
-        <link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
-        <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css">
-        <link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+    <script src="{{asset('js table/main.js')}}"></script>
+    <script src="{{asset('vendors/scripts/core.js')}}"></script>
+    <script src="{{asset('vendors/scripts/script.min.js')}}"></script>
+    <script src="{{asset('vendors/scripts/process.js')}}"></script>
+    <script src="{{asset('vendors/scripts/layout-settings.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/responsive.bootstrap4.min.js')}}"></script>
+    <!-- buttons for Export datatable -->
+    <script src="{{asset('src/plugins/datatables/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/pdfmake.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/js/vfs_fonts.js')}}"></script>
+    <!-- Datatable Setting js -->
+    <script src="{{asset('vendors/scripts/datatable-setting.js')}}"></script>
+    <link rel="{{asset('stylesheet" type="text/css" href="vendors/styles/core.css')}}">
+    <link rel="{{asset('stylesheet" type="text/css" href="vendors/styles/icon-font.min.css')}}">
+    <link rel="{{asset('stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="{{asset('stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css')}}">
+    <link rel="{{asset('stylesheet" type="text/css" href="vendors/styles/style.css')}}">
 
-        <scri   pt>
+    <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
             gtag('config', 'UA-119386393-1');
-        </scri>
+        </script>
 
 
 <script>

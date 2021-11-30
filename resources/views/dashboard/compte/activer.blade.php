@@ -64,16 +64,20 @@ margin-left: 170px;
 
       </div>
 </div>
+
 <script amount="50000"
                     callback="{{route('abonnement.store')}}"
+                      {{-- callback="{{ route('payement.reussi') }}" --}}
                     data=""
-                    url=""
+                    name="{{ auth()->user()->name ?? '' }}"
+                    phone="{{ auth()->user()->contact ?? '' }}"
+                    url="{{asset('storage/images/logoJR.png')}}"
                     position="center"
                     theme="#00FF"
                     sandbox="true"
                     key="042121e0216011ec9d3a81cf5faf6ca6"
                     src="https://cdn.kkiapay.me/k.js">
                 </script>
-                <script src="https://cdn.kkiapay.me/k.js"></script>
-
+                <script src="https://cdn.kkiapay.me/k.js">
+            </script>
 @endsection

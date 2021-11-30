@@ -14,10 +14,6 @@ class AbonnementController extends Controller
         $companies=Compte::all();
         return view('dashboard.abonnement.index', compact('companies'));
     }
-    // public function abonner()
-    // {
-    //     return view('dashboard.abonnement.abonner');
-    // }
 
     public function store(Request $request)
     {
@@ -28,7 +24,6 @@ class AbonnementController extends Controller
             //notification
             $company=auth()->user()->compte;
             $admin=User::where('type', 0)->first();
-            // $text='<strong class="text-success">'. $company->name.'</strong>';
             Notification::create([
                 'message'=>"La compagnie . $company->name. vient d'activer son compte",
                 'sender'=>auth()->user()->id,

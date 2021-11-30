@@ -4,16 +4,18 @@
 
 <div class="card-box mb-30">
     <div class="pd-20">
-        <h4 class="text-blue" style="text-align: center">Liste des categories.</h4>
+        <h4 class="text-blue" style="text-align: center">Liste des restaurants.</h4>
     </div>
     <div class="pb-20">
-        <table class="data-table table hover multiple-select-row nowrap">
+        <table class="table hover multiple-select-row nowrap">
             <thead>
                 <tr class="row100 head">
                     <th class="cell100 column1">Numero</th>
                     <th class="cell100 column2">Nom de la Compagnie</th>
                     <th class="cell100 column3">Status</th>
                     <th class="cell100 column4">Action</th>
+                    <th class="cell100 column5">Date d'abonnement</th>
+
                 </tr>
             </thead>
                 <tbody>
@@ -48,9 +50,8 @@
                                     </form>
                                     @endif
                                   </div>
-
-
                                 </td>
+                                <td class="cell100 column2">{{$company->created_at->format('d/m/y')}}</td>
                             </tr>
 
                             @endforeach
