@@ -16,11 +16,19 @@ class GestionClientController extends Controller
 
     }
 
+    public function livraison()
+    {
+        $commandes=Commande::where('compte_id',auth()->user()->compte->id)->get();
+        return view('dashboard.gestion_client.livraison', compact('commandes'));
+
+    }
+
 
     public function reservation()
     {
         return view('dashboard.gestion_client.reservation');
     }
+
 
 
     public function index()

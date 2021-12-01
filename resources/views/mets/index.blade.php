@@ -57,8 +57,7 @@
 
                                         <hr>
                                     <p class="pro-pricing">
-                                        {{$met->price}}
-                                    </p>
+                                        {{$met->price}} F CFA</p>
                                 </div>
                                 <hr>
                                 <div class="product-details">

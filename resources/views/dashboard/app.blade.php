@@ -323,6 +323,16 @@
 
 						</ul>
 					</li>
+                    <li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-money"></span><span class="mtext">Mes payements</span>
+						</a>
+						<ul class="submenu">
+							<li><a href="{{route('gestion_client.livraison')}}">Livraison</a></li>
+
+						</ul>
+					</li>
+
                     @endif
 				</ul>
 

@@ -296,9 +296,12 @@
             if(location =='' && city ==''){
                 event.preventDefault();
                 isvalid=false;
-                $('#message-error').text("Veillez renseigner votre lieu de livraison et la ville");
-            }
-            $.ajaxSetup({
+                $('.message-error').text("Veillez renseigner votre lieu de livraison et la ville");
+            }else{
+                $('#confirmCmd').modal('hide');
+                $('.message-error').empty();
+
+                    $.ajaxSetup({
                 headers:{
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
@@ -318,15 +321,19 @@
                     $('#delivery-fees').text(response.deliveryFees + ' F CFA');
                     $('#total-amount').text(response.totalAmount + ' F CFA');
                     $('#paymentOperator').attr('amount', response.totalAmount);
+                    $('.payment-btn').removeClass('disabled');
                     var total=$('#paymentOperator').attr('amount');
                     console.log('Total à payer', total);
+
                 },
                 error: function(error){
                     console.log(error);
                 }
             })
 
+            }
         })
+
 
 
     </script>

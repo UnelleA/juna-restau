@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Livraison;
 use App\Models\met;
 use App\Models\Ville;
-use App\Models\Livraison;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use illuminate\Support\Facades\Session;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
@@ -19,34 +19,42 @@ class CartController extends Controller
      */
     public function index()
     {
-         session()->put('redirectback', route('cart.index'));
+        session()->put('redirectback', route('cart.index'));
         // dd(Cart::count());
         //$ville =  Ville::all();
 
-        $ville=[];
-        if (Cart::count()>0) {
-            $met=Cart::content()->first();
-            $ville=DB::table('villes')->join('livraisons', 'villes.id', '=', 'livraisons.ville_id')->where('restaurant_id', $met->model->compte_id)->get();
+        $ville = [];
+        if (Cart::count() > 0) {
+            $met = Cart::content()->first();
+            $ville = DB::table('villes')->join('livraisons', 'villes.id', '=', 'livraisons.ville_id')->where('restaurant_id', $met->model->compte_id)->get();
         }
+
         return view('cart.index', compact('ville'));
     }
-    public function deliverIsNo(){
-        $amount=Cart::total();
+
+    public function deliverIsNo()
+    {
+        $amount = Cart::total();
+
         return $amount;
     }
 
-    public function deliverIsYes(Request $request){
-        $deliveryFees=Livraison::where('id', $request->city)->first();
-        $deliveryFees= $deliveryFees !=null ? $deliveryFees->cout : 0;
-        $city=Ville::find($deliveryFees->ville_id);
-            session()->put('deliveryInfo',[
-                'city'=>$city->nom,
-                'location'=>$request->location,
-                'amount'=>$deliveryFees
-            ]);
-        $amount=Cart::subtotal() + $deliveryFees;
+    public function deliverIsYes(Request $request)
+    {
+        $deliveries = Livraison::where('id', $request->city)->first();
+        $deliveryFees = $deliveries != null ? $deliveries->cout : 0;
+        if($deliveries){
+            $city = Ville::find($deliveries->ville_id);
+            session()->put('deliveryInfo', [
+                    'city' => $city->nom,
+                    'location' => $request->location,
+                    'amount' => $deliveryFees,
+                ]);
+        }
 
-        return response()->json(['deliveryFees' => $deliveryFees, 'totalAmount'=>$amount]);
+        $amount = Cart::subtotal() + $deliveryFees;
+
+        return response()->json(['deliveryFees' => $deliveryFees, 'totalAmount' => $amount]);
     }
 
     /**
@@ -71,24 +79,22 @@ class CartController extends Controller
             return $cartItem->id == $request->met_id;
        });
         if ($duplicate->isNotEmpty()) {
-           return response()->json(['modif'=>'Ce met est ajouté déjà']);
-
+            return response()->json(['modif' => 'Ce met est ajouté déjà']);
         }
         //   dd($request->p_id);
         $met = met::find($request->met_id);
         Cart::add($met->id, $met->title, 1, $met->price)
         ->associate('App\Models\met');
         $request->session()->flash('showModal', 1);
-        return response()->json(['success'=>'Le met a été bien ajouté']);
 
-
+        return response()->json(['success' => 'Le met a été bien ajouté']);
     }
+
     // fonction  publique modifier ()
     // {
     //     toast ( 'Post édité !' );
     //     return  redirect ( route ( 'posts.list' ));
     // };
-
 
     /**
      * Display the specified resource.
@@ -121,10 +127,10 @@ class CartController extends Controller
     {
         $data = $request->json()->all();
         Cart::update($request->Id, (int) $request->qty);
-        $subtotal=getPrice(Cart::subtotal());
+        $subtotal = getPrice(Cart::subtotal());
         // dd($request->qty);
 
-        return response()->json(['success'=>'La quantité du produit a ete mise ajout', 'subtotal'=>$subtotal]);
+        return response()->json(['success' => 'La quantité du produit a ete mise ajout', 'subtotal' => $subtotal]);
     }
 
     /**
@@ -144,6 +150,7 @@ class CartController extends Controller
     public function empty()
     {
         Cart::destroy();
+
         return back();
     }
 }

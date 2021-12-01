@@ -62,6 +62,8 @@ class AbonnementController extends Controller
 
     public function livreur()
     {
-        return view('dashboard.abonnement.livreur');
+        $livreur=Compte::where(auth()->user()->type==3);
+        return view('dashboard.abonnement.livreur', compact('livreur'));
+        // return view('dashboard.abonnement.livreur');
     }
 }

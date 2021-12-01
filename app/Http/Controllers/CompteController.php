@@ -65,8 +65,7 @@ class CompteController extends Controller
             'description' => 'required',
             'specialite' => 'required',
             'image' => 'required|image',
-            // 'video' => 'sometimes|required|video',
-            'video' => 'sometimes|image',
+            'video' => 'sometimes',
      ]);
         // dd($request->image);
         $path = $request->file('image')->store('logo', 'public');
@@ -90,7 +89,8 @@ class CompteController extends Controller
     // }
     public function show_resto($slug)
     {
-            $company = Compte::where('slug', $slug)->firstOrFail();
-        return view('resto.show_resto' , compact('company'));
+        $company = Compte::where('slug', $slug)->firstOrFail();
+
+        return view('resto.show_resto', compact('company'));
     }
 }

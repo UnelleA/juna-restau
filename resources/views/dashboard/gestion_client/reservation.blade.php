@@ -25,7 +25,7 @@
                         <th class="cell100 column10">Quantité du mets</th>
                         <th class="cell100 column11">Note ajoutéé</th>
                         <th class="cell100 column12">Montant</th>
-                        <th class="cell100 column13">Action</th>
+                        {{-- <th class="cell100 column13">Action</th> --}}
                     </tr>
                 </thead>
                        <tbody>

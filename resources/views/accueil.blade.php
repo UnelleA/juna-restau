@@ -7,14 +7,14 @@
 <section class="product-prev-sec product-list-sec">
 
     <div class="container center-block">
-        <div class="text-accueil  text-center">Consultez les restaurants de votre choix et choisissez vos mets.</div>
+        <div class="text-accueil  text-center" style="margin-left: 350px">Consultez les restaurants de votre choix et choisissez vos mets.</div>
 <hr>
         <div class="product-rev-wrap">
-            <div class="cat-product">
+            <div class="cat-product"  style="margin-left: 350px">
                     <div class="row">
                          @foreach ($companies as $company)
                          {{-- container text-center shadow-lg col-8 col-md-6 mb-5 py-4 --}}
-                        <div class="col-xl-3 col-md-4">
+                        <div class="col-xl-3 col-md-8">
                          <div class="pro-box card border border-warning">
                              <div class="pro-img">
                                     <img src='{{Storage::url($company->image)}}' alt="">
@@ -28,6 +28,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- @foreach ($companies as $company) --}}
                     @endforeach
                     {{-- $mets = $company->mets()->zinRandomOrder()->paginate(6); --}}
                     <div>
@@ -48,12 +49,12 @@
         <img class="card-img-top" src="{{asset('storage/images/client.jfif')}}" alt="client">
         <div class="card-body bg-primary">
           <h5 class="card-title">Chers clients,</h5>
-          <p class="card-text">faites vos commandes dans les restaurants de vos choix.</p>
+          <p class="card-text">faites vos commandes dans les restaurants de votre choix.</p>
         </div>
       </div>
    </div>
    <div class="col-md-4">
-    <div class="card" style="width: 18rem; color: white">
+    <div class="card" style="width: 18rem; color: white; margin-top: 15px">
         <img class="card-img-top" src="{{asset('storage/images/restaurateur.jfif')}}" alt="Restaurateur">
         <div class="card-body bg-primary">
           <h5 class="card-title">Chers restaurateurs,</h5>
@@ -63,7 +64,7 @@
    </div>
 
 <div class="col-md-4">
-   <div class="card" style="width: 18rem; color: white">
+   <div class="card" style="width: 18rem; color: white; margin-top: 90px">
     <img class="card-img-top" src="{{asset('storage/images/livreur.png')}}" alt="Livreur">
     <div class="card-body bg-primary">
       <h5 class="card-title">Chers livreurs,</h5>

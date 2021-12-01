@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $companies=Compte::orderBy('id', 'asc')->paginate(4);
+    $companies=Compte::orderBy('id', 'asc')->paginate(8);
     // $companies=Compte::all();
     return view('accueil', compact('companies'));
 })->name('home');
@@ -75,6 +75,7 @@ Route::resource('compte', 'App\Http\Controllers\CompteController');
 // gestion client
 Route::get('commande', 'App\Http\Controllers\GestionClientController@commande')->name('gestion_client.commande');
 Route::get('reservation', 'App\Http\Controllers\GestionClientController@reservation')->name('gestion_client.reservation');
+Route::get('livraison', 'App\Http\Controllers\GestionClientController@livraison')->name('gestion_client.livraison');
 
 
 // abonnement

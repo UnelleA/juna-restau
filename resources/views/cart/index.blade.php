@@ -82,7 +82,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div> 
+        </div>
         <div class="modal-body">
          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="note"></textarea>
         </div>
@@ -115,7 +115,7 @@
                 @endauth
 
                 @guest
-                <a href="{{ route('login')}}" class="btn btn-primary btn-sm" >Connecter vous pour finaliser votre achat</a>
+                <a href="{{ route('login')}}" class="btn btn-primary btn-sm" >Connectez-vous pour finaliser votre achat</a>
 
                 @endguest
 
@@ -133,7 +133,7 @@
        <form action="">
             @csrf
             <div>
-                <small id="message-error" class="text-danger text-italic"></small>
+                <small class="message-error" class="text-danger text-italic"></small>
             </div>
             <div class="form-group row">
                 <label for="lieu" class="col-md-4 col-form-label text-md-right">{{ __('Lieu de livraison') }}</label>
@@ -185,7 +185,7 @@
 
   {{-- modal du boutton soumettre --}}
   <div class="modal fade" id="soumet" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 90000">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Procéder au paiement</h5>
@@ -201,8 +201,11 @@
                 {{-- <strong id="modal-non"></strong> --}}
             </p>
             <p>
-        <button style="margin-left: 800px" type="button"  class="kkiapay-button btn btn-primary rounded mx-auto my-4">Passez au paiement</button>
+        <button style="margin-left: 800px" type="button"  class="kkiapay-button btn btn-primary rounded mx-auto my-4 payment-btn disabled" >Passez au paiement</button>
             </p>
+            <div>
+                <i class="message-error" class="text-danger text-italic"></i>
+            </div>
         </div>
         <div class="modal-footer">
         </div>
@@ -254,22 +257,22 @@
 @endif
 
 {{-- sdk kkiapay --}}
-<script src="https://cdn.kkiapay.me/k.js"></script>
+
 
 <script id="paymentOperator" amount=""
     callback="{{ route('payement.reussi') }}"
     data=""
-    name="{{ auth()->user()->name ?? '' }}"
+    {{-- name="{{ auth()->user()->name ?? '' }}" --}}
     {{-- phone="{{ auth()->user()->contact ?? '' }}"
     url="{{asset('storage/images/logoJR.png')}}" --}}
     position="center"
-    theme="#0000FF"
+    theme="#00FF"
     sandbox="true"
     key="042121e0216011ec9d3a81cf5faf6ca6"
     src="https://cdn.kkiapay.me/k.js">
 </script>
+<script src="https://cdn.kkiapay.me/k.js"></script>
 
-{{-- end sdk kkiapay --}}
 @endsection
 
 
